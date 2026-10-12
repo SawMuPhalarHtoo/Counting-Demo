@@ -2,7 +2,7 @@
 <html lang="my">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>မြန်မာသင်္ချာနှင့် အင်္ဂလိပ် ABC လေ့လာရန်</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,6 +17,7 @@
             font-family: 'Padauk', 'Quicksand', sans-serif;
             background: linear-gradient(135deg, #fbcfe8 0%, #bae6fd 50%, #fef08a 100%);
             min-height: 100vh;
+            touch-action: manipulation;
         }
         .title-font {
             font-family: 'Padauk', 'Quicksand', sans-serif;
@@ -39,54 +40,57 @@
         canvas.drawing-board {
             touch-action: none;
             cursor: crosshair;
+            display: block;
+            width: 100%;
+            height: auto;
         }
-        /* Notebook Four-line background style */
-        .notebook-line {
-            background-color: #f8fafc;
+        /* Exact Four-line Notebook background matching reference photo */
+        .notebook-page-exact {
+            background-color: #ffffff;
             background-image: 
-                linear-gradient(to bottom, #ef4444 2px, transparent 2px),
+                linear-gradient(to bottom, #ef4444 1.5px, transparent 1.5px),
                 linear-gradient(to bottom, #3b82f6 1px, transparent 1px),
                 linear-gradient(to bottom, #3b82f6 1px, transparent 1px),
-                linear-gradient(to bottom, #ef4444 2px, transparent 2px);
-            background-size: 100% 80px;
-            background-position: 0 0, 0 20px, 0 40px, 0 60px;
-            background-repeat: repeat-y;
+                linear-gradient(to bottom, #ef4444 1.5px, transparent 1.5px);
+            background-size: 100% 48px;
+            background-position: 0 0, 0 12px, 0 24px, 0 36px;
+            background-repeat: repeat;
         }
     </style>
 </head>
 <body class="text-slate-800 flex flex-col min-h-screen select-none overflow-x-hidden">
 
-    <header class="bg-white/90 backdrop-blur-md shadow-md py-4 px-6 sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+    <header class="bg-white/90 backdrop-blur-md shadow-md py-3 px-4 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
             <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-amber-400 rounded-full flex items-center justify-center text-white text-2xl shadow-inner floating">
+                <div class="w-10 h-10 bg-amber-400 rounded-full flex items-center justify-center text-white text-xl shadow-inner floating">
                     <i class="fa-solid fa-star"></i>
                 </div>
-                <h1 class="title-font text-2xl sm:text-3xl text-pink-500 tracking-wide drop-shadow-sm">ကလေးတို့အတွက် သင်ယူစရာ</h1>
+                <h1 class="title-font text-xl sm:text-2xl text-pink-500 tracking-wide drop-shadow-sm">ကလေးတို့အတွက် သင်ယူစရာ</h1>
             </div>
             <!-- Main Mode Switcher Tabs -->
-            <div class="flex flex-wrap items-center gap-2">
-                <button id="mainTabNumbers" onclick="switchMainTab('numbers')" class="px-4 py-2 rounded-full title-font text-sm sm:text-base transition-all bg-pink-500 text-white shadow-md">
+            <div class="flex flex-wrap items-center justify-center gap-2">
+                <button id="mainTabNumbers" onclick="switchMainTab('numbers')" class="px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all bg-pink-500 text-white shadow-md">
                     <i class="fa-solid fa-calculator mr-1"></i> ဂဏန်း (၁-၂၀)
                 </button>
-                <button id="mainTabAbc" onclick="switchMainTab('abc')" class="px-4 py-2 rounded-full title-font text-sm sm:text-base transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm">
+                <button id="mainTabAbc" onclick="switchMainTab('abc')" class="px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm">
                     <i class="fa-solid fa-font mr-1"></i> အင်္ဂလိပ် ABC
                 </button>
-                <button id="mainTabVoice" onclick="switchMainTab('voice')" class="px-4 py-2 rounded-full title-font text-sm sm:text-base transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm">
+                <button id="mainTabVoice" onclick="switchMainTab('voice')" class="px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm">
                     <i class="fa-solid fa-microphone mr-1"></i> ကိုယ်ပိုင်အသံ
                 </button>
             </div>
         </div>
     </header>
 
-    <main class="flex-grow max-w-6xl w-full mx-auto p-4 sm:p-6 flex flex-col justify-center">
+    <main class="flex-grow max-w-6xl w-full mx-auto p-3 sm:p-6 flex flex-col justify-center">
         
         <!-- ================= NUMBER SECTION (1-20) ================= -->
-        <section id="numberSection" class="flex flex-col gap-6">
+        <section id="numberSection" class="flex flex-col gap-5">
             <div class="flex flex-wrap justify-between items-center bg-white/60 backdrop-blur-sm p-4 rounded-3xl shadow-sm border border-white/40 gap-3">
                 <div>
-                    <h2 class="title-font text-2xl sm:text-3xl text-indigo-600 mb-1">ဂဏန်းများကို လေ့လာရေတွက်ပါ</h2>
-                    <p class="text-slate-600 text-sm sm:text-base">ဂဏန်းတစ်လုံးချင်းကိုနှိပ်၍ အသံနားထောင်ပြီး ပစ္စည်းများကို ရေတွက်ကြည့်ပါ!</p>
+                    <h2 class="title-font text-xl sm:text-2xl text-indigo-600 mb-1">ဂဏန်းများကို လေ့လာရေတွက်ပါ</h2>
+                    <p class="text-slate-600 text-xs sm:text-sm">ဂဏန်းတစ်လုံးချင်းကိုနှိပ်၍ အသံနားထောင်ပြီး ပစ္စည်းများကို ရေတွက်ကြည့်ပါ!</p>
                 </div>
                 <!-- Range & Sub-modes -->
                 <div class="flex flex-wrap items-center gap-2">
@@ -103,53 +107,53 @@
             </div>
 
             <!-- Number Learn Sub-View -->
-            <div id="numLearnView" class="flex flex-col gap-6">
-                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4" id="numberCardsContainer"></div>
+            <div id="numLearnView" class="flex flex-col gap-5">
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="numberCardsContainer"></div>
 
-                <div id="displayStage" class="bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border-4 border-pink-300 flex flex-col items-center justify-center min-h-[340px] relative overflow-hidden">
-                    <div class="absolute top-4 left-4 bg-pink-100 text-pink-600 px-4 py-1.5 rounded-full title-font text-sm">ပြကွက်စင်မြင့်</div>
+                <div id="displayStage" class="bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-8 shadow-xl border-4 border-pink-300 flex flex-col items-center justify-center min-h-[320px] relative overflow-hidden">
+                    <div class="absolute top-3 left-3 bg-pink-100 text-pink-600 px-3 py-1 rounded-full title-font text-xs">ပြကွက်စင်မြင့်</div>
                     
-                    <div id="stageDefault" class="text-center py-10">
-                        <div class="text-6xl sm:text-7xl mb-4 text-amber-400 floating"><i class="fa-solid fa-face-smile-beam"></i></div>
-                        <h3 class="title-font text-2xl text-slate-700">အထက်ပါ ဂဏန်းတစ်ခုကို ရွေးချယ်ပါ</h3>
+                    <div id="stageDefault" class="text-center py-8">
+                        <div class="text-5xl sm:text-6xl mb-3 text-amber-400 floating"><i class="fa-solid fa-face-smile-beam"></i></div>
+                        <h3 class="title-font text-xl text-slate-700">အထက်ပါ ဂဏန်းတစ်ခုကို ရွေးချယ်ပါ</h3>
                     </div>
 
                     <div id="stageActive" class="hidden flex flex-col items-center w-full">
-                        <div class="flex items-center justify-center gap-6 mb-6">
-                            <span id="activeDigit" class="title-font text-6xl sm:text-8xl text-pink-500 drop-shadow-md">၁</span>
+                        <div class="flex items-center justify-center gap-4 sm:gap-6 mb-4">
+                            <span id="activeDigit" class="title-font text-5xl sm:text-7xl text-pink-500 drop-shadow-md">၁</span>
                             <div class="flex flex-col items-start">
-                                <span id="activeWord" class="title-font text-3xl sm:text-4xl text-indigo-600 uppercase tracking-wider">တစ်</span>
-                                <button onclick="repeatSpeech()" class="mt-2 bg-amber-400 hover:bg-amber-500 text-white px-4 py-2 rounded-2xl title-font text-sm flex items-center gap-2 shadow-md">
-                                    <i class="fa-solid fa-volume-high text-lg"></i> ထပ်နားထောင်မည်
+                                <span id="activeWord" class="title-font text-2xl sm:text-3xl text-indigo-600 uppercase tracking-wider">တစ်</span>
+                                <button onclick="repeatSpeech()" class="mt-2 bg-amber-400 hover:bg-amber-500 text-white px-3 py-1.5 rounded-2xl title-font text-xs sm:text-sm flex items-center gap-2 shadow-md">
+                                    <i class="fa-solid fa-volume-high"></i> ထပ်နားထောင်မည်
                                 </button>
                             </div>
                         </div>
-                        <!-- Countable items stage (NO animals, standard shapes/fruit icons) -->
-                        <div id="objectContainer" class="flex flex-wrap justify-center items-center gap-3 max-w-3xl min-h-[140px] p-4 bg-slate-50/80 rounded-2xl border-2 border-dashed border-indigo-200"></div>
-                        <div id="countingProgressText" class="mt-4 title-font text-xl text-indigo-500 h-8"></div>
+                        <!-- Countable items stage -->
+                        <div id="objectContainer" class="flex flex-wrap justify-center items-center gap-2 sm:gap-3 max-w-3xl min-h-[120px] p-3 bg-slate-50/80 rounded-2xl border-2 border-dashed border-indigo-200"></div>
+                        <div id="countingProgressText" class="mt-3 title-font text-lg text-indigo-500 h-7"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Number Counting Quiz Sub-View -->
-            <div id="numGameView" class="hidden flex flex-col gap-6">
-                <div class="bg-white/95 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-xl border-4 border-indigo-300 flex flex-col items-center text-center relative">
-                    <div class="absolute top-4 left-4 bg-indigo-100 text-indigo-600 px-4 py-1.5 rounded-full title-font text-sm flex items-center gap-2">
+            <div id="numGameView" class="hidden flex flex-col gap-5">
+                <div class="bg-white/95 backdrop-blur-md p-5 sm:p-8 rounded-3xl shadow-xl border-4 border-indigo-300 flex flex-col items-center text-center relative">
+                    <div class="absolute top-3 left-3 bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full title-font text-xs flex items-center gap-1.5">
                         <i class="fa-solid fa-trophy text-amber-500"></i> အမှတ်: <span id="scoreVal">0</span>
                     </div>
                     
-                    <h2 class="title-font text-3xl text-indigo-600 mb-2 mt-4">ပစ္စည်းများကို ရေတွက်ပါ</h2>
-                    <p class="text-slate-600 text-lg mb-6">အောက်ပါ ပစ္စည်းမည်မျှ ရှိပါသလဲ?</p>
+                    <h2 class="title-font text-2xl sm:text-3xl text-indigo-600 mb-1 mt-3">ပစ္စည်းများကို ရေတွက်ပါ</h2>
+                    <p class="text-slate-600 text-base mb-5">အောက်ပါ ပစ္စည်းမည်မျှ ရှိပါသလဲ?</p>
 
-                    <div id="quizObjectsContainer" class="flex flex-wrap justify-center items-center gap-3 max-w-2xl min-h-[160px] p-6 bg-amber-50/80 rounded-2xl border-2 border-dashed border-amber-300 mb-8 w-full"></div>
+                    <div id="quizObjectsContainer" class="flex flex-wrap justify-center items-center gap-2 sm:gap-3 max-w-2xl min-h-[140px] p-4 bg-amber-50/80 rounded-2xl border-2 border-dashed border-amber-300 mb-6 w-full"></div>
 
                     <div class="w-full max-w-2xl">
-                        <h3 class="title-font text-xl text-slate-700 mb-4">မှန်ကန်သော ဂဏန်းကို ရွေးပါ:</h3>
-                        <div id="quizOptionsContainer" class="grid grid-cols-2 sm:grid-cols-5 gap-3"></div>
+                        <h3 class="title-font text-lg text-slate-700 mb-3">မှန်ကန်သော ဂဏန်းကို ရွေးပါ:</h3>
+                        <div id="quizOptionsContainer" class="grid grid-cols-2 sm:grid-cols-5 gap-2.5"></div>
                     </div>
 
-                    <div id="quizFeedback" class="mt-6 text-2xl title-font h-10 flex items-center justify-center"></div>
-                    <button id="nextQuestionBtn" onclick="startQuizRound()" class="hidden mt-4 bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-full title-font text-xl shadow-lg flex items-center gap-3">
+                    <div id="quizFeedback" class="mt-4 text-xl title-font h-8 flex items-center justify-center"></div>
+                    <button id="nextQuestionBtn" onclick="startQuizRound()" class="hidden mt-3 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2.5 rounded-full title-font text-lg shadow-lg flex items-center gap-2">
                         <i class="fa-solid fa-arrow-right"></i> နောက်မေးခွန်းသို့
                     </button>
                 </div>
@@ -157,36 +161,36 @@
         </section>
 
         <!-- ================= ABC SECTION (A-Z) ================= -->
-        <section id="abcSection" class="hidden flex flex-col gap-6">
+        <section id="abcSection" class="hidden flex flex-col gap-5">
             <div class="flex flex-wrap justify-between items-center bg-white/60 backdrop-blur-sm p-4 rounded-3xl shadow-sm border border-white/40 gap-3">
                 <div>
-                    <h2 class="title-font text-2xl sm:text-3xl text-purple-600 mb-1">အင်္ဂလိပ် ABC လေ့လာရန်နှင့် ရေးသားရန်</h2>
-                    <p class="text-slate-600 text-sm sm:text-base">A မှ Z ထိ အက္ခရာများကို လေ့လာပါ၊ စာရေးသားပုံ လေ့ကျင့်ပါ၊ မှတ်ဉာဏ်စမ်းပါ!</p>
+                    <h2 class="title-font text-xl sm:text-2xl text-purple-600 mb-1">အင်္ဂလိပ် ABC လေ့လာရန်နှင့် ရေးသားရန်</h2>
+                    <p class="text-slate-600 text-xs sm:text-sm">A မှ Z ထိ အက္ခရာများကို လေ့လာပါ၊ စာရေးသားပုံ လေ့ကျင့်ပါ၊ မှတ်ဉာဏ်စမ်းပါ!</p>
                 </div>
                 <div class="flex flex-wrap bg-slate-100 p-1 rounded-full shadow-inner gap-1">
-                    <button id="abcSubTabLearn" onclick="switchAbcSubMode('learn')" class="px-3 py-1.5 rounded-full title-font text-xs bg-purple-500 text-white shadow">အက္ခရာလေ့လာရန်</button>
-                    <button id="abcSubTabTrace" onclick="switchAbcSubMode('trace')" class="px-3 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-purple-500">စာရေးလေ့ကျင့်ရန်</button>
-                    <button id="abcSubTabMemory" onclick="switchAbcSubMode('memory')" class="px-3 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-purple-500">A-Z မှတ်ဉာဏ်ဖြင့်ရေးမည်</button>
-                    <button id="abcSubTabQuiz" onclick="switchAbcSubMode('quiz')" class="px-3 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-purple-500">ABC မှတ်ဉာဏ်စမ်းမည်</button>
+                    <button id="abcSubTabLearn" onclick="switchAbcSubMode('learn')" class="px-2.5 py-1.5 rounded-full title-font text-xs bg-purple-500 text-white shadow">အက္ခရာလေ့လာရန်</button>
+                    <button id="abcSubTabTrace" onclick="switchAbcSubMode('trace')" class="px-2.5 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-purple-500">စာရေးလေ့ကျင့်ရန်</button>
+                    <button id="abcSubTabMemory" onclick="switchAbcSubMode('memory')" class="px-2.5 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-purple-500">A-Z မှတ်ဉာဏ်ဖြင့်ရေးမည်</button>
+                    <button id="abcSubTabQuiz" onclick="switchAbcSubMode('quiz')" class="px-2.5 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-purple-500">ABC မှတ်ဉာဏ်စမ်းမည်</button>
                 </div>
             </div>
 
             <!-- ABC Learn Sub-View -->
-            <div id="abcLearnView" class="flex flex-col gap-6">
-                <div class="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-9 gap-3" id="abcCardsContainer"></div>
+            <div id="abcLearnView" class="flex flex-col gap-5">
+                <div class="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-9 gap-2.5" id="abcCardsContainer"></div>
                 
-                <div class="bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border-4 border-purple-300 flex flex-col items-center justify-center min-h-[300px]">
-                    <div id="abcStageDefault" class="text-center py-6">
-                        <div class="text-6xl mb-3 text-purple-400 floating"><i class="fa-solid fa-book-bookmark"></i></div>
-                        <h3 class="title-font text-2xl text-slate-700">အထက်ပါ အက္ခရာတစ်ခုကို ရွေးချယ်ပါ</h3>
+                <div class="bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-8 shadow-xl border-4 border-purple-300 flex flex-col items-center justify-center min-h-[280px]">
+                    <div id="abcStageDefault" class="text-center py-5">
+                        <div class="text-5xl mb-2 text-purple-400 floating"><i class="fa-solid fa-book-bookmark"></i></div>
+                        <h3 class="title-font text-xl text-slate-700">အထက်ပါ အက္ခရာတစ်ခုကို ရွေးချယ်ပါ</h3>
                     </div>
                     <div id="abcStageActive" class="hidden flex flex-col items-center text-center w-full">
-                        <div class="flex items-center justify-center gap-8 mb-4">
-                            <span id="abcActiveLetter" class="title-font text-7xl sm:text-9xl text-purple-600 drop-shadow-md">A</span>
+                        <div class="flex items-center justify-center gap-6 mb-3">
+                            <span id="abcActiveLetter" class="title-font text-6xl sm:text-8xl text-purple-600 drop-shadow-md">A</span>
                             <div class="flex flex-col items-center">
-                                <div id="abcActiveVocabIcon" class="text-5xl sm:text-6xl mb-2 text-rose-500">🍎</div>
-                                <span id="abcActiveVocabWord" class="title-font text-2xl sm:text-3xl text-slate-700">Apple</span>
-                                <button onclick="speakAbcActive()" class="mt-3 bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-2xl title-font text-sm flex items-center gap-2 shadow">
+                                <div id="abcActiveVocabIcon" class="text-4xl sm:text-5xl mb-1 text-rose-500">🍎</div>
+                                <span id="abcActiveVocabWord" class="title-font text-xl sm:text-2xl text-slate-700">Apple</span>
+                                <button onclick="speakAbcActive()" class="mt-2 bg-purple-500 hover:bg-purple-600 text-white px-3.5 py-1.5 rounded-2xl title-font text-xs sm:text-sm flex items-center gap-1.5 shadow">
                                     <i class="fa-solid fa-volume-high"></i> အသံနားထောင်မည်
                                 </button>
                             </div>
@@ -196,76 +200,76 @@
             </div>
 
             <!-- ABC Trace Sub-View -->
-            <div id="abcTraceView" class="hidden flex flex-col gap-6 items-center">
-                <div class="bg-white/95 backdrop-blur-md rounded-3xl p-6 shadow-xl border-4 border-purple-300 flex flex-col items-center w-full max-w-xl">
-                    <h3 class="title-font text-xl text-purple-600 mb-3">ရေးသားလေ့ကျင့်ရန် အက္ခရာကို ရွေးပါ</h3>
-                    <div class="flex flex-wrap justify-center gap-2 mb-6" id="traceLetterPicker"></div>
+            <div id="abcTraceView" class="hidden flex flex-col gap-5 items-center">
+                <div class="bg-white/95 backdrop-blur-md rounded-3xl p-5 shadow-xl border-4 border-purple-300 flex flex-col items-center w-full max-w-lg">
+                    <h3 class="title-font text-lg text-purple-600 mb-2">ရေးသားလေ့ကျင့်ရန် အက္ခရာကို ရွေးပါ</h3>
+                    <div class="flex flex-wrap justify-center gap-1.5 mb-4" id="traceLetterPicker"></div>
                     
-                    <div class="relative bg-slate-50 border-4 border-dashed border-purple-200 rounded-2xl shadow-inner overflow-hidden">
-                        <canvas id="traceCanvas" width="300" height="300" class="drawing-board bg-white"></canvas>
+                    <div class="relative bg-slate-50 border-4 border-dashed border-purple-200 rounded-2xl shadow-inner overflow-hidden w-[280px] h-[280px] sm:w-[320px] sm:h-[320px]">
+                        <canvas id="traceCanvas" width="320" height="320" class="drawing-board bg-white w-full h-full"></canvas>
                     </div>
                     
-                    <div class="flex gap-4 mt-4">
-                        <button onclick="clearTraceCanvas()" class="bg-rose-500 hover:bg-rose-600 text-white px-5 py-2 rounded-2xl title-font text-sm shadow">
+                    <div class="flex gap-3 mt-4">
+                        <button onclick="clearTraceCanvas()" class="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-2xl title-font text-xs sm:text-sm shadow">
                             <i class="fa-solid fa-eraser mr-1"></i> ဖျက်မည်
                         </button>
-                        <button onclick="checkTracing()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2 rounded-2xl title-font text-sm shadow">
+                        <button onclick="checkTracing()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 rounded-2xl title-font text-xs sm:text-sm shadow">
                             <i class="fa-solid fa-check mr-1"></i> ပြီးပါပြီ
                         </button>
                     </div>
-                    <div id="traceFeedback" class="mt-3 title-font text-lg h-8"></div>
+                    <div id="traceFeedback" class="mt-2 title-font text-base h-7"></div>
                 </div>
             </div>
 
-            <!-- A-Z Memory Writing Practice Sub-View (Notebook Format) -->
-            <div id="abcMemoryWritingView" class="hidden flex flex-col gap-6 items-center">
-                <div class="bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border-4 border-purple-300 flex flex-col items-center w-full max-w-4xl">
-                    <div class="text-center mb-4">
-                        <h3 class="title-font text-2xl text-purple-600">A မှ Z ထိ မှတ်ဉာဏ်ဖြင့် အစဉ်လိုက် ရေးသားလေ့ကျင့်ရန်</h3>
-                        <p class="text-slate-600 text-sm">အောက်ပါ အနီရောင်မျဉ်းနှင့် အပြာရောင်မျဉ်း (Four-line) စာအုပ်မျဉ်းအတွင်းတွင် အက္ခရာကြီး (Capital) နှင့် အက္ခရာသေး (Small) များကို အစဉ်လိုက် ရေးသားပါ (ဥပမာ: Aa, Bb, Cc ... Zz)</p>
+            <!-- A-Z Memory Writing Practice Sub-View (Exact Four-line Notebook Sheet Format) -->
+            <div id="abcMemoryWritingView" class="hidden flex flex-col gap-5 items-center">
+                <div class="bg-white/95 backdrop-blur-md rounded-3xl p-4 sm:p-6 shadow-xl border-4 border-purple-300 flex flex-col items-center w-full max-w-4xl">
+                    <div class="text-center mb-3">
+                        <h3 class="title-font text-xl sm:text-2xl text-purple-600">A မှ Z ထိ မှတ်ဉာဏ်ဖြင့် အစဉ်လိုက် ရေးသားလေ့ကျင့်ရန်</h3>
+                        <p class="text-slate-600 text-xs sm:text-sm">အောက်ပါ ကျောင်းသုံးလေးကြောင်းစပ် (Four-line) စာအုပ်မျဉ်းအတွင်းတွင် အက္ခရာကြီးနှင့် အက္ခရာသေးများကို အစဉ်လိုက် ရေးသားပါ</p>
                     </div>
 
-                    <!-- Notebook Sheet -->
-                    <div class="relative w-full border-4 border-red-400 rounded-2xl shadow-inner overflow-hidden bg-white">
-                        <div class="absolute top-2 right-4 text-xs font-bold text-slate-400">Date: _______________</div>
-                        <canvas id="memoryCanvas" width="800" height="400" class="drawing-board notebook-line w-full"></canvas>
+                    <!-- Exact Notebook Sheet with responsive wrapper -->
+                    <div class="relative w-full border-4 border-slate-800 rounded-2xl shadow-xl overflow-hidden bg-white">
+                        <div class="absolute top-2 right-4 text-xs sm:text-sm font-semibold text-slate-500 tracking-wider">Date: _________________</div>
+                        <canvas id="memoryCanvas" width="800" height="600" class="drawing-board notebook-page-exact w-full h-[380px] sm:h-[480px]"></canvas>
                     </div>
 
                     <!-- Controls for Memory Writing -->
-                    <div class="flex flex-wrap gap-4 mt-4 items-center justify-center">
-                        <button onclick="clearMemoryCanvas()" class="bg-rose-500 hover:bg-rose-600 text-white px-5 py-2 rounded-2xl title-font text-sm shadow flex items-center gap-2">
+                    <div class="flex flex-wrap gap-3 mt-4 items-center justify-center">
+                        <button onclick="clearMemoryCanvas()" class="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-2xl title-font text-xs sm:text-sm shadow flex items-center gap-2">
                             <i class="fa-solid fa-eraser"></i> အစမှ ပြန်ရေးမည်
                         </button>
-                        <button onclick="submitMemoryWriting()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-2 rounded-2xl title-font text-base shadow flex items-center gap-2">
+                        <button onclick="submitMemoryWriting()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2 rounded-2xl title-font text-sm sm:text-base shadow flex items-center gap-2">
                             <i class="fa-solid fa-check-circle"></i> စစ်ဆေးမည် (Submit)
                         </button>
                     </div>
 
-                    <div id="memoryFeedback" class="mt-4 title-font text-xl text-center min-h-[40px]"></div>
+                    <div id="memoryFeedback" class="mt-3 title-font text-lg sm:text-xl text-center min-h-[35px]"></div>
                 </div>
             </div>
 
             <!-- ABC Quiz Sub-View -->
-            <div id="abcQuizView" class="hidden flex flex-col gap-6">
-                <div class="bg-white/95 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-xl border-4 border-purple-300 flex flex-col items-center text-center relative">
-                    <div class="absolute top-4 left-4 bg-purple-100 text-purple-600 px-4 py-1.5 rounded-full title-font text-sm flex items-center gap-2">
+            <div id="abcQuizView" class="hidden flex flex-col gap-5">
+                <div class="bg-white/95 backdrop-blur-md p-5 sm:p-8 rounded-3xl shadow-xl border-4 border-purple-300 flex flex-col items-center text-center relative">
+                    <div class="absolute top-3 left-3 bg-purple-100 text-purple-600 px-3 py-1 rounded-full title-font text-xs flex items-center gap-1.5">
                         <i class="fa-solid fa-trophy text-amber-500"></i> ABC အမှတ်: <span id="abcScoreVal">0</span>
                     </div>
 
-                    <h2 class="title-font text-3xl text-purple-600 mb-2 mt-4">ABC မှတ်ဉာဏ်စမ်းသပ်မည်</h2>
-                    <p class="text-slate-600 text-lg mb-6">ဖော်ပြထားသော ပုံ သို့မဟုတ် အရာဝတ္ထုအတွက် မှန်ကန်သော အင်္ဂလိပ်အက္ခရာကို ရွေးပါ</p>
+                    <h2 class="title-font text-2xl sm:text-3xl text-purple-600 mb-1 mt-3">ABC မှတ်ဉာဏ်စမ်းသပ်မည်</h2>
+                    <p class="text-slate-600 text-base mb-5">ဖော်ပြထားသော ပုံ သို့မဟုတ် အရာဝတ္ထုအတွက် မှန်ကန်သော အင်္ဂလိပ်အက္ခရာကို ရွေးပါ</p>
 
-                    <div id="abcQuizPromptContainer" class="flex flex-col items-center justify-center p-6 bg-purple-50/80 rounded-2xl border-2 border-dashed border-purple-300 mb-8 w-full max-w-md">
-                        <div id="abcQuizIcon" class="text-6xl mb-3">🍎</div>
-                        <div id="abcQuizHintText" class="title-font text-xl text-slate-700">Apple</div>
+                    <div id="abcQuizPromptContainer" class="flex flex-col items-center justify-center p-5 bg-purple-50/80 rounded-2xl border-2 border-dashed border-purple-300 mb-6 w-full max-w-md">
+                        <div id="abcQuizIcon" class="text-5xl sm:text-6xl mb-2">🍎</div>
+                        <div id="abcQuizHintText" class="title-font text-lg sm:text-xl text-slate-700">Apple</div>
                     </div>
 
                     <div class="w-full max-w-xl">
-                        <div id="abcQuizOptionsContainer" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+                        <div id="abcQuizOptionsContainer" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5"></div>
                     </div>
 
-                    <div id="abcQuizFeedback" class="mt-6 text-2xl title-font h-10 flex items-center justify-center"></div>
-                    <button id="abcNextQuestionBtn" onclick="startAbcQuizRound()" class="hidden mt-4 bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-full title-font text-xl shadow-lg flex items-center gap-3">
+                    <div id="abcQuizFeedback" class="mt-4 text-xl title-font h-8 flex items-center justify-center"></div>
+                    <button id="abcNextQuestionBtn" onclick="startAbcQuizRound()" class="hidden mt-3 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2.5 rounded-full title-font text-lg shadow-lg flex items-center gap-2">
                         <i class="fa-solid fa-arrow-right"></i> နောက်မေးခွန်းသို့
                     </button>
                 </div>
@@ -273,28 +277,28 @@
         </section>
 
         <!-- ================= VOICE RECORDING SECTION ================= -->
-        <section id="voiceSection" class="hidden flex flex-col gap-6">
-            <div class="bg-white/95 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-xl border-4 border-amber-300 flex flex-col items-center">
-                <div class="w-16 h-16 bg-amber-400 rounded-full flex items-center justify-center text-white text-3xl mb-3 shadow floating">
+        <section id="voiceSection" class="hidden flex flex-col gap-5">
+            <div class="bg-white/95 backdrop-blur-md p-5 sm:p-8 rounded-3xl shadow-xl border-4 border-amber-300 flex flex-col items-center">
+                <div class="w-14 h-14 bg-amber-400 rounded-full flex items-center justify-center text-white text-2xl mb-2 shadow floating">
                     <i class="fa-solid fa-microphone-lines"></i>
                 </div>
-                <h2 class="title-font text-2xl sm:text-3xl text-amber-600 mb-2 text-center">သင့်ကိုယ်ပိုင်အသံ မှတ်တမ်းတင်ရန်</h2>
-                <p class="text-slate-600 text-center text-sm sm:text-base max-w-xl mb-6">
+                <h2 class="title-font text-xl sm:text-2xl text-amber-600 mb-2 text-center">သင့်ကိုယ်ပိုင်အသံ မှတ်တမ်းတင်ရန်</h2>
+                <p class="text-slate-600 text-center text-xs sm:text-sm max-w-xl mb-5">
                     ဂဏန်း (၁ မှ ၂၀) နှင့် အက္ခရာ (A မှ Z) များအတွက် သင့်ကိုယ်ပိုင်အသံ (သို့မဟုတ် ကလေး၏အသံ) ဖြင့် မှတ်တမ်းတင်နိုင်ပါသည်။ အသံသွင်းထားပါက ကလေးနှိပ်သည့်အခါ သင်သွင်းထားသော အသံဖြင့် ထွက်ပေါ်လာမည်ဖြစ်သည်။
                 </p>
 
-                <div class="flex bg-amber-100 p-1.5 rounded-full shadow-inner gap-2 mb-6">
-                    <button id="voiceTabNum" onclick="switchVoiceTab('numbers')" class="px-5 py-2 rounded-full title-font text-sm bg-amber-500 text-white shadow">ဂဏန်းအသံများ</button>
-                    <button id="voiceTabAbc" onclick="switchVoiceTab('abc')" class="px-5 py-2 rounded-full title-font text-sm text-amber-900 hover:bg-amber-200">ABC အသံများ</button>
+                <div class="flex bg-amber-100 p-1 rounded-full shadow-inner gap-2 mb-5">
+                    <button id="voiceTabNum" onclick="switchVoiceTab('numbers')" class="px-4 py-1.5 rounded-full title-font text-xs sm:text-sm bg-amber-500 text-white shadow">ဂဏန်းအသံများ</button>
+                    <button id="voiceTabAbc" onclick="switchVoiceTab('abc')" class="px-4 py-1.5 rounded-full title-font text-xs sm:text-sm text-amber-900 hover:bg-amber-200">ABC အသံများ</button>
                 </div>
 
-                <div class="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[400px] overflow-y-auto p-3 bg-slate-50 rounded-2xl border border-slate-200" id="voiceItemsContainer"></div>
+                <div class="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[360px] overflow-y-auto p-2.5 bg-slate-50 rounded-2xl border border-slate-200" id="voiceItemsContainer"></div>
             </div>
         </section>
 
     </main>
 
-    <footer class="text-center py-6 text-slate-600 text-sm font-semibold">
+    <footer class="text-center py-4 text-slate-600 text-xs sm:text-sm font-semibold">
         <p>ချစ်စရာ ကလေးငယ်များအတွက် မြန်မာသင်္ချာနှင့် အင်္ဂလိပ် ABC လေ့လာရန် ❤️🌟</p>
     </footer>
 
@@ -339,7 +343,6 @@
             { letter: "Y", word: "Yacht", icon: "⛵" }, { letter: "Z", word: "Zebra", icon: "🦓" }
         ];
 
-        // State variables
         let currentMainTab = 'numbers';
         let currentRange = 'all';
         let numSubMode = 'learn';
@@ -355,10 +358,8 @@
         let currentAbcQuizTarget = null;
         let activeTraceLetter = 'A';
 
-        // Custom Voice Recordings storage
         let customVoices = JSON.parse(localStorage.getItem('customVoices') || '{}');
 
-        // Web Audio Synthesizer
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playSound(type) {
             if (!audioCtx) return;
@@ -415,30 +416,29 @@
             }
         }
 
-        // Main Tab Switcher
         function switchMainTab(tab) {
             currentMainTab = tab;
             document.getElementById('numberSection').classList.add('hidden');
             document.getElementById('abcSection').classList.add('hidden');
             document.getElementById('voiceSection').classList.add('hidden');
 
-            document.getElementById('mainTabNumbers').className = "px-4 py-2 rounded-full title-font text-sm sm:text-base transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm";
-            document.getElementById('mainTabAbc').className = "px-4 py-2 rounded-full title-font text-sm sm:text-base transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm";
-            document.getElementById('mainTabVoice').className = "px-4 py-2 rounded-full title-font text-sm sm:text-base transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm";
+            document.getElementById('mainTabNumbers').className = "px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm";
+            document.getElementById('mainTabAbc').className = "px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm";
+            document.getElementById('mainTabVoice').className = "px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm";
 
             window.speechSynthesis.cancel();
 
             if (tab === 'numbers') {
                 document.getElementById('numberSection').classList.remove('hidden');
-                document.getElementById('mainTabNumbers').className = "px-4 py-2 rounded-full title-font text-sm sm:text-base transition-all bg-pink-500 text-white shadow-md";
+                document.getElementById('mainTabNumbers').className = "px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all bg-pink-500 text-white shadow-md";
                 initLearnCards();
             } else if (tab === 'abc') {
                 document.getElementById('abcSection').classList.remove('hidden');
-                document.getElementById('mainTabAbc').className = "px-4 py-2 rounded-full title-font text-sm sm:text-base transition-all bg-purple-500 text-white shadow-md";
+                document.getElementById('mainTabAbc').className = "px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all bg-purple-500 text-white shadow-md";
                 initAbcCards();
             } else if (tab === 'voice') {
                 document.getElementById('voiceSection').classList.remove('hidden');
-                document.getElementById('mainTabVoice').className = "px-4 py-2 rounded-full title-font text-sm sm:text-base transition-all bg-amber-500 text-white shadow-md";
+                document.getElementById('mainTabVoice').className = "px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all bg-amber-500 text-white shadow-md";
                 initVoiceManager();
             }
         }
@@ -478,9 +478,9 @@
 
             filtered.forEach(item => {
                 const card = document.createElement('div');
-                card.className = `bg-white rounded-3xl p-3 sm:p-4 shadow-md border-4 ${item.border} flex flex-col items-center justify-center cursor-pointer transition-all hover:scale-105 active:scale-95 group`;
+                card.className = `bg-white rounded-3xl p-3 shadow-md border-4 ${item.border} flex flex-col items-center justify-center cursor-pointer transition-all hover:scale-105 active:scale-95 group`;
                 card.innerHTML = `
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full ${item.bg} ${item.color} flex items-center justify-center text-lg sm:text-xl mb-1 group-hover:rotate-12 transition-transform">
+                    <div class="w-10 h-10 rounded-full ${item.bg} ${item.color} flex items-center justify-center text-lg mb-1 group-hover:rotate-12 transition-transform">
                         <i class="fa-solid ${item.icon}"></i>
                     </div>
                     <span class="title-font text-3xl sm:text-4xl ${item.color}">${item.burmeseNum}</span>
@@ -509,7 +509,7 @@
 
             for (let i = 0; i < data.num; i++) {
                 const obj = document.createElement('div');
-                obj.className = `w-12 h-12 sm:w-14 sm:h-14 rounded-full ${data.bg} ${data.color} flex items-center justify-center text-xl sm:text-2xl shadow-md cursor-pointer transition-all duration-300 transform scale-0 hover:scale-110 active:scale-90`;
+                obj.className = `w-12 h-12 rounded-full ${data.bg} ${data.color} flex items-center justify-center text-xl shadow-md cursor-pointer transition-all duration-300 transform scale-0 hover:scale-110 active:scale-90`;
                 obj.innerHTML = `<i class="fa-solid ${data.icon}"></i>`;
                 
                 obj.onclick = (e) => {
@@ -565,7 +565,7 @@
 
             for (let i = 0; i < currentQuizTarget; i++) {
                 const el = document.createElement('div');
-                el.className = `w-10 h-10 sm:w-12 sm:h-12 rounded-full ${targetData.bg} ${targetData.color} flex items-center justify-center text-xl shadow-sm floating`;
+                el.className = `w-10 h-10 rounded-full ${targetData.bg} ${targetData.color} flex items-center justify-center text-xl shadow-sm floating`;
                 el.style.animationDelay = `${(i * 0.1)}s`;
                 el.innerHTML = `<i class="fa-solid ${targetData.icon}"></i>`;
                 quizObjsContainer.appendChild(el);
@@ -625,26 +625,26 @@
             document.getElementById('abcMemoryWritingView').classList.add('hidden');
             document.getElementById('abcQuizView').classList.add('hidden');
             
-            document.getElementById('abcSubTabLearn').className = "px-3 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-purple-500";
-            document.getElementById('abcSubTabTrace').className = "px-3 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-purple-500";
-            document.getElementById('abcSubTabMemory').className = "px-3 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-purple-500";
-            document.getElementById('abcSubTabQuiz').className = "px-3 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-purple-500";
+            document.getElementById('abcSubTabLearn').className = "px-2.5 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-purple-500";
+            document.getElementById('abcSubTabTrace').className = "px-2.5 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-purple-500";
+            document.getElementById('abcSubTabMemory').className = "px-2.5 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-purple-500";
+            document.getElementById('abcSubTabQuiz').className = "px-2.5 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-purple-500";
 
             if (sub === 'learn') {
                 document.getElementById('abcLearnView').classList.remove('hidden');
-                document.getElementById('abcSubTabLearn').className = "px-3 py-1.5 rounded-full title-font text-xs bg-purple-500 text-white shadow";
+                document.getElementById('abcSubTabLearn').className = "px-2.5 py-1.5 rounded-full title-font text-xs bg-purple-500 text-white shadow";
                 initAbcCards();
             } else if (sub === 'trace') {
                 document.getElementById('abcTraceView').classList.remove('hidden');
-                document.getElementById('abcSubTabTrace').className = "px-3 py-1.5 rounded-full title-font text-xs bg-purple-500 text-white shadow";
+                document.getElementById('abcSubTabTrace').className = "px-2.5 py-1.5 rounded-full title-font text-xs bg-purple-500 text-white shadow";
                 initTracePicker();
             } else if (sub === 'memory') {
                 document.getElementById('abcMemoryWritingView').classList.remove('hidden');
-                document.getElementById('abcSubTabMemory').className = "px-3 py-1.5 rounded-full title-font text-xs bg-purple-500 text-white shadow";
+                document.getElementById('abcSubTabMemory').className = "px-2.5 py-1.5 rounded-full title-font text-xs bg-purple-500 text-white shadow";
                 initMemoryCanvas();
             } else {
                 document.getElementById('abcQuizView').classList.remove('hidden');
-                document.getElementById('abcSubTabQuiz').className = "px-3 py-1.5 rounded-full title-font text-xs bg-purple-500 text-white shadow";
+                document.getElementById('abcSubTabQuiz').className = "px-2.5 py-1.5 rounded-full title-font text-xs bg-purple-500 text-white shadow";
                 startAbcQuizRound();
             }
         }
@@ -654,11 +654,11 @@
             container.innerHTML = '';
             abcData.forEach(item => {
                 const card = document.createElement('div');
-                card.className = "bg-white rounded-2xl p-3 shadow-md border-3 border-purple-200 flex flex-col items-center justify-center cursor-pointer transition-all hover:scale-105 active:scale-95 group";
+                card.className = "bg-white rounded-2xl p-2.5 shadow-md border-3 border-purple-200 flex flex-col items-center justify-center cursor-pointer transition-all hover:scale-105 active:scale-95 group";
                 card.innerHTML = `
-                    <span class="text-2xl mb-1">${item.icon}</span>
-                    <span class="title-font text-3xl text-purple-600 group-hover:rotate-6">${item.letter}</span>
-                    <span class="text-[10px] text-slate-400 font-bold uppercase">${item.word}</span>
+                    <span class="text-xl mb-0.5">${item.icon}</span>
+                    <span class="title-font text-2xl sm:text-3xl text-purple-600 group-hover:rotate-6">${item.letter}</span>
+                    <span class="text-[9px] text-slate-400 font-bold uppercase">${item.word}</span>
                 `;
                 card.onclick = () => selectAbcCard(item);
                 container.appendChild(card);
@@ -693,7 +693,7 @@
             picker.innerHTML = '';
             abcData.forEach(item => {
                 const btn = document.createElement('button');
-                btn.className = `w-9 h-9 rounded-xl title-font text-base shadow transition-all ${activeTraceLetter === item.letter ? 'bg-purple-600 text-white scale-110' : 'bg-purple-100 text-purple-800 hover:bg-purple-200'}`;
+                btn.className = `w-8 h-8 rounded-xl title-font text-sm shadow transition-all ${activeTraceLetter === item.letter ? 'bg-purple-600 text-white scale-110' : 'bg-purple-100 text-purple-800 hover:bg-purple-200'}`;
                 btn.innerText = item.letter;
                 btn.onclick = () => {
                     activeTraceLetter = item.letter;
@@ -711,11 +711,11 @@
             ctx.lineWidth = 2;
             ctx.setLineDash([5, 5]);
             ctx.beginPath();
-            ctx.arc(150, 150, 120, 0, Math.PI * 2);
+            ctx.arc(canvas.width/2, canvas.height/2, 110, 0, Math.PI * 2);
             ctx.stroke();
             ctx.setLineDash([]);
 
-            ctx.font = 'bold 160px Quicksand, sans-serif';
+            ctx.font = 'bold 150px Quicksand, sans-serif';
             ctx.fillStyle = '#f1f5f9';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
@@ -731,13 +731,19 @@
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mouseup', stopDrawing);
         canvas.addEventListener('mouseleave', stopDrawing);
-        canvas.addEventListener('touchstart', (e) => { startDrawing(e.touches[0]); e.preventDefault(); });
-        canvas.addEventListener('touchmove', (e) => { draw(e.touches[0]); e.preventDefault(); });
+        
+        canvas.addEventListener('touchstart', (e) => { startDrawing(e.touches[0]); e.preventDefault(); }, {passive: false});
+        canvas.addEventListener('touchmove', (e) => { draw(e.touches[0]); e.preventDefault(); }, {passive: false});
         canvas.addEventListener('touchend', stopDrawing);
 
         function getMousePos(e, cElem) {
             const rect = cElem.getBoundingClientRect();
-            return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+            const scaleX = cElem.width / rect.width;
+            const scaleY = cElem.height / rect.height;
+            return {
+                x: (e.clientX - rect.left) * scaleX,
+                y: (e.clientY - rect.top) * scaleY
+            };
         }
 
         function startDrawing(e) {
@@ -814,7 +820,7 @@
             memCtx.lineCap = 'round';
             memCtx.lineJoin = 'round';
             e.preventDefault();
-        });
+        }, {passive: false});
 
         memCanvas.addEventListener('touchmove', (e) => {
             if (!isMemDrawing) return;
@@ -822,12 +828,11 @@
             memCtx.lineTo(pos.x, pos.y);
             memCtx.stroke();
             e.preventDefault();
-        });
+        }, {passive: false});
 
         memCanvas.addEventListener('touchend', () => { isMemDrawing = false; });
 
         function submitMemoryWriting() {
-            // Check if canvas has drawings (non-empty pixel check)
             const pixelData = memCtx.getImageData(0, 0, memCanvas.width, memCanvas.height).data;
             let drawnPixels = 0;
             for (let i = 3; i < pixelData.length; i += 4) {
@@ -842,7 +847,6 @@
                 return;
             }
 
-            // Interactive celebration & check simulation for A-Z sequential memory writing
             playSound('success');
             confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 } });
             feedback.innerHTML = '<span class="text-emerald-600 animate-bounce">🏆 ဂုဏ်ယူပါတယ်! A မှ Z ထိ အစဉ်လိုက် မှန်ကန်စွာ ရေးသားနိုင်ပါပြီ။ ရမှတ်: 100/100 🌟</span>';
@@ -908,8 +912,8 @@
         // ================= VOICE RECORDING MANAGER =================
         function switchVoiceTab(tab) {
             voiceTab = tab;
-            document.getElementById('voiceTabNum').className = tab === 'numbers' ? "px-5 py-2 rounded-full title-font text-sm bg-amber-500 text-white shadow" : "px-5 py-2 rounded-full title-font text-sm text-amber-900 hover:bg-amber-200";
-            document.getElementById('voiceTabAbc').className = tab === 'abc' ? "px-5 py-2 rounded-full title-font text-sm bg-amber-500 text-white shadow" : "px-5 py-2 rounded-full title-font text-sm text-amber-900 hover:bg-amber-200";
+            document.getElementById('voiceTabNum').className = tab === 'numbers' ? "px-4 py-1.5 rounded-full title-font text-xs sm:text-sm bg-amber-500 text-white shadow" : "px-4 py-1.5 rounded-full title-font text-xs sm:text-sm text-amber-900 hover:bg-amber-200";
+            document.getElementById('voiceTabAbc').className = tab === 'abc' ? "px-4 py-1.5 rounded-full title-font text-xs sm:text-sm bg-amber-500 text-white shadow" : "px-4 py-1.5 rounded-full title-font text-xs sm:text-sm text-amber-900 hover:bg-amber-200";
             initVoiceManager();
         }
 
@@ -928,21 +932,21 @@
 
             items.forEach(item => {
                 const row = document.createElement('div');
-                row.className = "flex items-center justify-between p-3 bg-white rounded-2xl shadow-sm border border-slate-200 gap-3";
+                row.className = "flex items-center justify-between p-2.5 sm:p-3 bg-white rounded-2xl shadow-sm border border-slate-200 gap-2";
                 const hasCustom = customVoices[item.key] ? "✅ အသံသွင်းပြီး" : "⚪ အသံမရှိသေးပါ";
                 row.innerHTML = `
                     <div class="flex flex-col">
-                        <span class="title-font text-lg text-slate-700">${item.label}</span>
-                        <span class="text-xs font-bold text-slate-400">${hasCustom}</span>
+                        <span class="title-font text-base sm:text-lg text-slate-700">${item.label}</span>
+                        <span class="text-[11px] font-bold text-slate-400">${hasCustom}</span>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <button onclick="testCustomVoice('${item.key}')" class="bg-indigo-100 hover:bg-indigo-200 text-indigo-700 px-3 py-1.5 rounded-xl title-font text-xs flex items-center gap-1">
-                            <i class="fa-solid fa-play"></i> နားထောင်မည်
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="testCustomVoice('${item.key}')" class="bg-indigo-100 hover:bg-indigo-200 text-indigo-700 px-2.5 py-1.5 rounded-xl title-font text-[11px] flex items-center gap-1">
+                            <i class="fa-solid fa-play"></i> နားထောင်
                         </button>
-                        <button id="recBtn_${item.key}" onclick="toggleRecord('${item.key}')" class="bg-rose-500 hover:bg-rose-600 text-white px-3 py-1.5 rounded-xl title-font text-xs flex items-center gap-1">
-                            <i class="fa-solid fa-microphone"></i> အသံသွင်းမည်
+                        <button id="recBtn_${item.key}" onclick="toggleRecord('${item.key}')" class="bg-rose-500 hover:bg-rose-600 text-white px-2.5 py-1.5 rounded-xl title-font text-[11px] flex items-center gap-1">
+                            <i class="fa-solid fa-microphone"></i> အသံသွင်း
                         </button>
-                        ${customVoices[item.key] ? `<button onclick="deleteCustomVoice('${item.key}')" class="text-slate-400 hover:text-rose-500 px-2 py-1"><i class="fa-solid fa-trash"></i></button>` : ''}
+                        ${customVoices[item.key] ? `<button onclick="deleteCustomVoice('${item.key}')" class="text-slate-400 hover:text-rose-500 px-1.5 py-1"><i class="fa-solid fa-trash"></i></button>` : ''}
                     </div>
                 `;
                 container.appendChild(row);
@@ -975,7 +979,7 @@
                     };
 
                     mediaRecorder.start();
-                    btn.className = "bg-emerald-600 text-white px-3 py-1.5 rounded-xl title-font text-xs flex items-center gap-1 animate-pulse";
+                    btn.className = "bg-emerald-600 text-white px-2.5 py-1.5 rounded-xl title-font text-[11px] flex items-center gap-1 animate-pulse";
                     btn.innerHTML = `<i class="fa-solid fa-stop"></i> ရပ်မည်`;
                 } catch (err) {
                     alert('မိုက်ခရိုဖုန်း အသုံးပြုခွင့် မရှိပါ သို့မဟုတ် ချို့ယွင်းချက်ရှိပါသည်။');
