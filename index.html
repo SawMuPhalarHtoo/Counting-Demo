@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>မြန်မာသင်္ချာနှင့် အင်္ဂလိပ် ABC လေ့လာရန်</title>
+    <title>မြန်မာသင်္ချာ၊ အင်္ဂလိပ်နှင့် မြန်မာအက္ခရာ လေ့လာရန်</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -60,7 +60,7 @@
 </head>
 <body class="text-slate-800 flex flex-col min-h-screen select-none overflow-x-hidden">
 
-    <header class="bg-white/90 backdrop-blur-md shadow-md py-3 px-4 sticky top-0 z-50">
+    <header class="bg-white/90 backdrop-blur-md shadow-md py-3 px-4 sticky top-0 z-40">
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-amber-400 rounded-full flex items-center justify-center text-white text-xl shadow-inner floating">
@@ -69,14 +69,20 @@
                 <h1 class="title-font text-xl sm:text-2xl text-pink-500 tracking-wide drop-shadow-sm">ကလေးတို့အတွက် သင်ယူစရာ</h1>
             </div>
             <!-- Main Mode Switcher Tabs -->
-            <div class="flex flex-wrap items-center justify-center gap-2">
-                <button id="mainTabNumbers" onclick="switchMainTab('numbers')" class="px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all bg-pink-500 text-white shadow-md">
-                    <i class="fa-solid fa-calculator mr-1"></i> ဂဏန်း (၁-၂၀)
+            <div class="flex flex-wrap items-center justify-center gap-1.5">
+                <button id="mainTabNumbers" onclick="switchMainTab('numbers')" class="px-2.5 py-1.5 rounded-full title-font text-xs transition-all bg-pink-500 text-white shadow-md">
+                    <i class="fa-solid fa-calculator mr-1"></i> မြန်မာဂဏန်း
                 </button>
-                <button id="mainTabAbc" onclick="switchMainTab('abc')" class="px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm">
-                    <i class="fa-solid fa-font mr-1"></i> အင်္ဂလိပ် ABC
+                <button id="mainTabEngNumbers" onclick="switchMainTab('engNumbers')" class="px-2.5 py-1.5 rounded-full title-font text-xs transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm">
+                    <i class="fa-solid fa-hashtag mr-1"></i> English Nos (1-20)
                 </button>
-                <button id="mainTabVoice" onclick="switchMainTab('voice')" class="px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm">
+                <button id="mainTabAbc" onclick="switchMainTab('abc')" class="px-2.5 py-1.5 rounded-full title-font text-xs transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm">
+                    <i class="fa-solid fa-font mr-1"></i> English ABC
+                </button>
+                <button id="mainTabMyanmarLetters" onclick="switchMainTab('myanmarLetters')" class="px-2.5 py-1.5 rounded-full title-font text-xs transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm">
+                    <i class="fa-solid fa-book-open mr-1"></i> မြန်မာအက္ခရာ (၃၃ လုံး)
+                </button>
+                <button id="mainTabVoice" onclick="switchMainTab('voice')" class="px-2.5 py-1.5 rounded-full title-font text-xs transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm">
                     <i class="fa-solid fa-microphone mr-1"></i> ကိုယ်ပိုင်အသံ
                 </button>
             </div>
@@ -85,14 +91,13 @@
 
     <main class="flex-grow max-w-6xl w-full mx-auto p-3 sm:p-6 flex flex-col justify-center">
         
-        <!-- ================= NUMBER SECTION (1-20) ================= -->
+        <!-- ================= NUMBER SECTION (1-20 Burmese) ================= -->
         <section id="numberSection" class="flex flex-col gap-5">
             <div class="flex flex-wrap justify-between items-center bg-white/60 backdrop-blur-sm p-4 rounded-3xl shadow-sm border border-white/40 gap-3">
                 <div>
-                    <h2 class="title-font text-xl sm:text-2xl text-indigo-600 mb-1">ဂဏန်းများကို လေ့လာရေတွက်ပါ</h2>
+                    <h2 class="title-font text-xl sm:text-2xl text-indigo-600 mb-1">မြန်မာဂဏန်းများကို လေ့လာရေတွက်ပါ</h2>
                     <p class="text-slate-600 text-xs sm:text-sm">ဂဏန်းတစ်လုံးချင်းကိုနှိပ်၍ အသံနားထောင်ပြီး ပစ္စည်းများကို ရေတွက်ကြည့်ပါ!</p>
                 </div>
-                <!-- Range & Sub-modes -->
                 <div class="flex flex-wrap items-center gap-2">
                     <div class="flex bg-amber-100 p-1 rounded-full shadow-inner gap-1">
                         <button id="range1to10" onclick="setNumberRange('1-10')" class="px-3 py-1 rounded-full title-font text-xs transition-all text-amber-800 hover:bg-amber-200">၁-၁၀</button>
@@ -128,7 +133,6 @@
                                 </button>
                             </div>
                         </div>
-                        <!-- Countable items stage -->
                         <div id="objectContainer" class="flex flex-wrap justify-center items-center gap-2 sm:gap-3 max-w-3xl min-h-[120px] p-3 bg-slate-50/80 rounded-2xl border-2 border-dashed border-indigo-200"></div>
                         <div id="countingProgressText" class="mt-3 title-font text-lg text-indigo-500 h-7"></div>
                     </div>
@@ -155,6 +159,79 @@
                     <div id="quizFeedback" class="mt-4 text-xl title-font h-8 flex items-center justify-center"></div>
                     <button id="nextQuestionBtn" onclick="startQuizRound()" class="hidden mt-3 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2.5 rounded-full title-font text-lg shadow-lg flex items-center gap-2">
                         <i class="fa-solid fa-arrow-right"></i> နောက်မေးခွန်းသို့
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= ENGLISH NUMBER SECTION (1-20) ================= -->
+        <section id="engNumberSection" class="hidden flex flex-col gap-5">
+            <div class="flex flex-wrap justify-between items-center bg-white/60 backdrop-blur-sm p-4 rounded-3xl shadow-sm border border-white/40 gap-3">
+                <div>
+                    <h2 class="title-font text-xl sm:text-2xl text-teal-600 mb-1">English Numbers (1-20)</h2>
+                    <p class="text-slate-600 text-xs sm:text-sm">Learn and count English numbers with audio and objects!</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <div class="flex bg-teal-100 p-1 rounded-full shadow-inner gap-1">
+                        <button id="engRange1to10" onclick="setEngNumberRange('1-10')" class="px-3 py-1 rounded-full title-font text-xs transition-all text-teal-800 hover:bg-teal-200">1-10</button>
+                        <button id="engRange11to20" onclick="setEngNumberRange('11-20')" class="px-3 py-1 rounded-full title-font text-xs transition-all text-teal-800 hover:bg-teal-200">11-20</button>
+                        <button id="engRangeAll" onclick="setEngNumberRange('all')" class="px-3 py-1 rounded-full title-font text-xs transition-all bg-teal-500 text-white shadow-sm">All</button>
+                    </div>
+                    <div class="flex bg-slate-100 p-1 rounded-full shadow-inner gap-1">
+                        <button id="engNumSubTabLearn" onclick="switchEngNumSubMode('learn')" class="px-3 py-1.5 rounded-full title-font text-xs bg-teal-500 text-white shadow">Learn</button>
+                        <button id="engNumSubTabGame" onclick="switchEngNumSubMode('game')" class="px-3 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-teal-500">Quiz</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- English Number Learn Sub-View -->
+            <div id="engNumLearnView" class="flex flex-col gap-5">
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="engNumberCardsContainer"></div>
+
+                <div id="engDisplayStage" class="bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-8 shadow-xl border-4 border-teal-300 flex flex-col items-center justify-center min-h-[320px] relative overflow-hidden">
+                    <div class="absolute top-3 left-3 bg-teal-100 text-teal-600 px-3 py-1 rounded-full title-font text-xs">Stage</div>
+                    
+                    <div id="engStageDefault" class="text-center py-8">
+                        <div class="text-5xl sm:text-6xl mb-3 text-teal-400 floating"><i class="fa-solid fa-calculator"></i></div>
+                        <h3 class="title-font text-xl text-slate-700">Select an English number above</h3>
+                    </div>
+
+                    <div id="engStageActive" class="hidden flex flex-col items-center w-full">
+                        <div class="flex items-center justify-center gap-4 sm:gap-6 mb-4">
+                            <span id="engActiveDigit" class="title-font text-5xl sm:text-7xl text-teal-600 drop-shadow-md">1</span>
+                            <div class="flex flex-col items-start">
+                                <span id="engActiveWord" class="title-font text-2xl sm:text-3xl text-indigo-600 uppercase tracking-wider">One</span>
+                                <button onclick="repeatEngSpeech()" class="mt-2 bg-teal-500 hover:bg-teal-600 text-white px-3 py-1.5 rounded-2xl title-font text-xs sm:text-sm flex items-center gap-2 shadow-md">
+                                    <i class="fa-solid fa-volume-high"></i> Listen Again
+                                </button>
+                            </div>
+                        </div>
+                        <div id="engObjectContainer" class="flex flex-wrap justify-center items-center gap-2 sm:gap-3 max-w-3xl min-h-[120px] p-3 bg-slate-50/80 rounded-2xl border-2 border-dashed border-teal-200"></div>
+                        <div id="engCountingProgressText" class="mt-3 title-font text-lg text-teal-600 h-7"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- English Number Counting Quiz Sub-View -->
+            <div id="engNumGameView" class="hidden flex flex-col gap-5">
+                <div class="bg-white/95 backdrop-blur-md p-5 sm:p-8 rounded-3xl shadow-xl border-4 border-teal-300 flex flex-col items-center text-center relative">
+                    <div class="absolute top-3 left-3 bg-teal-100 text-teal-600 px-3 py-1 rounded-full title-font text-xs flex items-center gap-1.5">
+                        <i class="fa-solid fa-trophy text-amber-500"></i> Score: <span id="engScoreVal">0</span>
+                    </div>
+                    
+                    <h2 class="title-font text-2xl sm:text-3xl text-teal-600 mb-1 mt-3">Count Objects Quiz</h2>
+                    <p class="text-slate-600 text-base mb-5">How many items are shown below?</p>
+
+                    <div id="engQuizObjectsContainer" class="flex flex-wrap justify-center items-center gap-2 sm:gap-3 max-w-2xl min-h-[140px] p-4 bg-teal-50/80 rounded-2xl border-2 border-dashed border-teal-300 mb-6 w-full"></div>
+
+                    <div class="w-full max-w-2xl">
+                        <h3 class="title-font text-lg text-slate-700 mb-3">Select the correct number:</h3>
+                        <div id="engQuizOptionsContainer" class="grid grid-cols-2 sm:grid-cols-5 gap-2.5"></div>
+                    </div>
+
+                    <div id="engQuizFeedback" class="mt-4 text-xl title-font h-8 flex items-center justify-center"></div>
+                    <button id="engNextQuestionBtn" onclick="startEngQuizRound()" class="hidden mt-3 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2.5 rounded-full title-font text-lg shadow-lg flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-right"></i> Next Question
                     </button>
                 </div>
             </div>
@@ -209,43 +286,24 @@
                         <canvas id="traceCanvas" width="320" height="320" class="drawing-board bg-white w-full h-full"></canvas>
                     </div>
                     
-                    <div class="flex gap-3 mt-4">
-                        <button onclick="clearTraceCanvas()" class="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-2xl title-font text-xs sm:text-sm shadow">
-                            <i class="fa-solid fa-eraser mr-1"></i> ဖျက်မည်
+                    <div class="flex flex-wrap justify-center gap-2 mt-4">
+                        <button id="tracePenBtn" onclick="setTraceTool('pen')" class="bg-purple-600 text-white px-3 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1">
+                            <i class="fa-solid fa-pen"></i> ဘောပင်
                         </button>
-                        <button onclick="checkTracing()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 rounded-2xl title-font text-xs sm:text-sm shadow">
-                            <i class="fa-solid fa-check mr-1"></i> ပြီးပါပြီ
+                        <button id="traceEraserBtn" onclick="setTraceTool('eraser')" class="bg-slate-200 text-slate-700 px-3 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1">
+                            <i class="fa-solid fa-eraser"></i> ဖျက်ဆေး
+                        </button>
+                        <button onclick="beautifyTraceCanvas()" class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> စာလုံးအလှပြောင်းမည်
+                        </button>
+                        <button onclick="clearTraceCanvas()" class="bg-rose-500 hover:bg-rose-600 text-white px-3 py-2 rounded-xl title-font text-xs shadow">
+                            <i class="fa-solid fa-rotate-right mr-1"></i> အစမှ
+                        </button>
+                        <button onclick="checkTracing()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-2 rounded-xl title-font text-xs shadow">
+                            <i class="fa-solid fa-check mr-1"></i> ပြီးပြီ
                         </button>
                     </div>
                     <div id="traceFeedback" class="mt-2 title-font text-base h-7"></div>
-                </div>
-            </div>
-
-            <!-- A-Z Memory Writing Practice Sub-View (Exact Four-line Notebook Sheet Format) -->
-            <div id="abcMemoryWritingView" class="hidden flex flex-col gap-5 items-center">
-                <div class="bg-white/95 backdrop-blur-md rounded-3xl p-4 sm:p-6 shadow-xl border-4 border-purple-300 flex flex-col items-center w-full max-w-4xl">
-                    <div class="text-center mb-3">
-                        <h3 class="title-font text-xl sm:text-2xl text-purple-600">A မှ Z ထိ မှတ်ဉာဏ်ဖြင့် အစဉ်လိုက် ရေးသားလေ့ကျင့်ရန်</h3>
-                        <p class="text-slate-600 text-xs sm:text-sm">အောက်ပါ ကျောင်းသုံးလေးကြောင်းစပ် (Four-line) စာအုပ်မျဉ်းအတွင်းတွင် အက္ခရာကြီးနှင့် အက္ခရာသေးများကို အစဉ်လိုက် ရေးသားပါ</p>
-                    </div>
-
-                    <!-- Exact Notebook Sheet with responsive wrapper -->
-                    <div class="relative w-full border-4 border-slate-800 rounded-2xl shadow-xl overflow-hidden bg-white">
-                        <div class="absolute top-2 right-4 text-xs sm:text-sm font-semibold text-slate-500 tracking-wider">Date: _________________</div>
-                        <canvas id="memoryCanvas" width="800" height="600" class="drawing-board notebook-page-exact w-full h-[380px] sm:h-[480px]"></canvas>
-                    </div>
-
-                    <!-- Controls for Memory Writing -->
-                    <div class="flex flex-wrap gap-3 mt-4 items-center justify-center">
-                        <button onclick="clearMemoryCanvas()" class="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-2xl title-font text-xs sm:text-sm shadow flex items-center gap-2">
-                            <i class="fa-solid fa-eraser"></i> အစမှ ပြန်ရေးမည်
-                        </button>
-                        <button onclick="submitMemoryWriting()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2 rounded-2xl title-font text-sm sm:text-base shadow flex items-center gap-2">
-                            <i class="fa-solid fa-check-circle"></i> စစ်ဆေးမည် (Submit)
-                        </button>
-                    </div>
-
-                    <div id="memoryFeedback" class="mt-3 title-font text-lg sm:text-xl text-center min-h-[35px]"></div>
                 </div>
             </div>
 
@@ -276,6 +334,103 @@
             </div>
         </section>
 
+        <!-- ================= MYANMAR LETTERS SECTION (33 Letters) ================= -->
+        <section id="myanLetterSection" class="hidden flex flex-col gap-5">
+            <div class="flex flex-wrap justify-between items-center bg-white/60 backdrop-blur-sm p-4 rounded-3xl shadow-sm border border-white/40 gap-3">
+                <div>
+                    <h2 class="title-font text-xl sm:text-2xl text-amber-600 mb-1">မြန်မာအက္ခရာ ဗျည်း (၃၃) လုံး လေ့လာရန်နှင့် ရေးသားရန်</h2>
+                    <p class="text-slate-600 text-xs sm:text-sm">မြန်မာဗျည်း ၃၃ လုံးကို လေ့လာပါ၊ စာရေးပုံလေ့ကျင့်ပါ၊ မှတ်ဉာဏ်စမ်းပါ!</p>
+                </div>
+                <div class="flex flex-wrap bg-slate-100 p-1 rounded-full shadow-inner gap-1">
+                    <button id="myanSubTabLearn" onclick="switchMyanSubMode('learn')" class="px-2.5 py-1.5 rounded-full title-font text-xs bg-amber-500 text-white shadow">အက္ခရာလေ့လာရန်</button>
+                    <button id="myanSubTabTrace" onclick="switchMyanSubMode('trace')" class="px-2.5 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-amber-600">စာရေးလေ့ကျင့်ရန်</button>
+                    <button id="myanSubTabMemory" onclick="switchMyanSubMode('memory')" class="px-2.5 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-amber-600">က-အ မှတ်ဉာဏ်ဖြင့်ရေးမည်</button>
+                    <button id="myanSubTabQuiz" onclick="switchMyanSubMode('quiz')" class="px-2.5 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-amber-600">အက္ခရာ မှတ်ဉာဏ်စမ်းမည်</button>
+                </div>
+            </div>
+
+            <!-- Myanmar Letter Learn Sub-View -->
+            <div id="myanLearnView" class="flex flex-col gap-5">
+                <div class="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-11 gap-2" id="myanCardsContainer"></div>
+                
+                <div class="bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-8 shadow-xl border-4 border-amber-300 flex flex-col items-center justify-center min-h-[280px]">
+                    <div id="myanStageDefault" class="text-center py-5">
+                        <div class="text-5xl mb-2 text-amber-400 floating"><i class="fa-solid fa-book-open-reader"></i></div>
+                        <h3 class="title-font text-xl text-slate-700">အထက်ပါ မြန်မာဗျည်းတစ်ခုကို ရွေးချယ်ပါ</h3>
+                    </div>
+                    <div id="myanStageActive" class="hidden flex flex-col items-center text-center w-full">
+                        <div class="flex items-center justify-center gap-6 mb-3">
+                            <span id="myanActiveLetter" class="title-font text-6xl sm:text-8xl text-amber-600 drop-shadow-md">က</span>
+                            <div class="flex flex-col items-center">
+                                <div id="myanActiveVocabIcon" class="text-4xl sm:text-5xl mb-1 text-rose-500">🐓</div>
+                                <span id="myanActiveVocabWord" class="title-font text-xl sm:text-2xl text-slate-700">ကက်ကက် (ကြက်)</span>
+                                <button onclick="speakMyanActive()" class="mt-2 bg-amber-500 hover:bg-amber-600 text-white px-3.5 py-1.5 rounded-2xl title-font text-xs sm:text-sm flex items-center gap-1.5 shadow">
+                                    <i class="fa-solid fa-volume-high"></i> အသံနားထောင်မည်
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Myanmar Letter Trace Sub-View -->
+            <div id="myanTraceView" class="hidden flex flex-col gap-5 items-center">
+                <div class="bg-white/95 backdrop-blur-md rounded-3xl p-5 shadow-xl border-4 border-amber-300 flex flex-col items-center w-full max-w-lg">
+                    <h3 class="title-font text-lg text-amber-600 mb-2">ရေးသားလေ့ကျင့်ရန် ဗျည်းကို ရွေးပါ (၃၃ လုံး)</h3>
+                    <div class="flex flex-wrap justify-center gap-1.5 mb-4 max-h-[120px] overflow-y-auto p-1" id="myanTraceLetterPicker"></div>
+                    
+                    <div class="relative bg-slate-50 border-4 border-dashed border-amber-200 rounded-2xl shadow-inner overflow-hidden w-[280px] h-[280px] sm:w-[320px] sm:h-[320px]">
+                        <canvas id="myanTraceCanvas" width="320" height="320" class="drawing-board bg-white w-full h-full"></canvas>
+                    </div>
+                    
+                    <div class="flex flex-wrap justify-center gap-2 mt-4">
+                        <button id="myanTracePenBtn" onclick="setMyanTraceTool('pen')" class="bg-amber-600 text-white px-3 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1">
+                            <i class="fa-solid fa-pen"></i> ဘောပင်
+                        </button>
+                        <button id="myanTraceEraserBtn" onclick="setMyanTraceTool('eraser')" class="bg-slate-200 text-slate-700 px-3 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1">
+                            <i class="fa-solid fa-eraser"></i> ဖျက်ဆေး
+                        </button>
+                        <button onclick="beautifyMyanTraceCanvas()" class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> စာလုံးအလှပြောင်းမည်
+                        </button>
+                        <button onclick="clearMyanTraceCanvas()" class="bg-rose-500 hover:bg-rose-600 text-white px-3 py-2 rounded-xl title-font text-xs shadow">
+                            <i class="fa-solid fa-rotate-right mr-1"></i> အစမှ
+                        </button>
+                        <button onclick="checkMyanTracing()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-2 rounded-xl title-font text-xs shadow">
+                            <i class="fa-solid fa-check mr-1"></i> ပြီးပြီ
+                        </button>
+                    </div>
+                    <div id="myanTraceFeedback" class="mt-2 title-font text-base h-7"></div>
+                </div>
+            </div>
+
+            <!-- Myanmar Letter Quiz Sub-View -->
+            <div id="myanQuizView" class="hidden flex flex-col gap-5">
+                <div class="bg-white/95 backdrop-blur-md p-5 sm:p-8 rounded-3xl shadow-xl border-4 border-amber-300 flex flex-col items-center text-center relative">
+                    <div class="absolute top-3 left-3 bg-amber-100 text-amber-600 px-3 py-1 rounded-full title-font text-xs flex items-center gap-1.5">
+                        <i class="fa-solid fa-trophy text-amber-500"></i> မှတ်ဉာဏ် အမှတ်: <span id="myanScoreVal">0</span>
+                    </div>
+
+                    <h2 class="title-font text-2xl sm:text-3xl text-amber-600 mb-1 mt-3">မြန်မာအက္ခရာ မှတ်ဉာဏ်စမ်းသပ်မည်</h2>
+                    <p class="text-slate-600 text-base mb-5">ဖော်ပြထားသော ပုံ သို့မဟုတ် အရာဝတ္ထုအတွက် မှန်ကန်သော မြန်မာဗျည်းအက္ခရာကို ရွေးပါ</p>
+
+                    <div id="myanQuizPromptContainer" class="flex flex-col items-center justify-center p-5 bg-amber-50/80 rounded-2xl border-2 border-dashed border-amber-300 mb-6 w-full max-w-md">
+                        <div id="myanQuizIcon" class="text-5xl sm:text-6xl mb-2">🐓</div>
+                        <div id="myanQuizHintText" class="title-font text-lg sm:text-xl text-slate-700">ကြက်</div>
+                    </div>
+
+                    <div class="w-full max-w-xl">
+                        <div id="myanQuizOptionsContainer" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5"></div>
+                    </div>
+
+                    <div id="myanQuizFeedback" class="mt-4 text-xl title-font h-8 flex items-center justify-center"></div>
+                    <button id="myanNextQuestionBtn" onclick="startMyanQuizRound()" class="hidden mt-3 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2.5 rounded-full title-font text-lg shadow-lg flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-right"></i> နောက်မေးခွန်းသို့
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <!-- ================= VOICE RECORDING SECTION ================= -->
         <section id="voiceSection" class="hidden flex flex-col gap-5">
             <div class="bg-white/95 backdrop-blur-md p-5 sm:p-8 rounded-3xl shadow-xl border-4 border-amber-300 flex flex-col items-center">
@@ -284,12 +439,14 @@
                 </div>
                 <h2 class="title-font text-xl sm:text-2xl text-amber-600 mb-2 text-center">သင့်ကိုယ်ပိုင်အသံ မှတ်တမ်းတင်ရန်</h2>
                 <p class="text-slate-600 text-center text-xs sm:text-sm max-w-xl mb-5">
-                    ဂဏန်း (၁ မှ ၂၀) နှင့် အက္ခရာ (A မှ Z) များအတွက် သင့်ကိုယ်ပိုင်အသံ (သို့မဟုတ် ကလေး၏အသံ) ဖြင့် မှတ်တမ်းတင်နိုင်ပါသည်။ အသံသွင်းထားပါက ကလေးနှိပ်သည့်အခါ သင်သွင်းထားသော အသံဖြင့် ထွက်ပေါ်လာမည်ဖြစ်သည်။
+                    ဂဏန်းများနှင့် အက္ခရာများအတွက် သင့်ကိုယ်ပိုင်အသံ (သို့မဟုတ် ကလေး၏အသံ) ဖြင့် မှတ်တမ်းတင်နိုင်ပါသည်။
                 </p>
 
-                <div class="flex bg-amber-100 p-1 rounded-full shadow-inner gap-2 mb-5">
-                    <button id="voiceTabNum" onclick="switchVoiceTab('numbers')" class="px-4 py-1.5 rounded-full title-font text-xs sm:text-sm bg-amber-500 text-white shadow">ဂဏန်းအသံများ</button>
-                    <button id="voiceTabAbc" onclick="switchVoiceTab('abc')" class="px-4 py-1.5 rounded-full title-font text-xs sm:text-sm text-amber-900 hover:bg-amber-200">ABC အသံများ</button>
+                <div class="flex flex-wrap bg-amber-100 p-1 rounded-full shadow-inner gap-1 mb-5 justify-center">
+                    <button id="voiceTabNum" onclick="switchVoiceTab('numbers')" class="px-3 py-1.5 rounded-full title-font text-xs bg-amber-500 text-white shadow">မြန်မာဂဏန်း</button>
+                    <button id="voiceTabEngNum" onclick="switchVoiceTab('engNumbers')" class="px-3 py-1.5 rounded-full title-font text-xs text-amber-900 hover:bg-amber-200">English Nos</button>
+                    <button id="voiceTabAbc" onclick="switchVoiceTab('abc')" class="px-3 py-1.5 rounded-full title-font text-xs text-amber-900 hover:bg-amber-200">English ABC</button>
+                    <button id="voiceTabMyan" onclick="switchVoiceTab('myanmarLetters')" class="px-3 py-1.5 rounded-full title-font text-xs text-amber-900 hover:bg-amber-200">မြန်မာအက္ခရာ (၃၃)</button>
                 </div>
 
                 <div class="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[360px] overflow-y-auto p-2.5 bg-slate-50 rounded-2xl border border-slate-200" id="voiceItemsContainer"></div>
@@ -298,8 +455,66 @@
 
     </main>
 
+    <!-- FULL SCREEN A-Z MEMORY WRITING MODAL -->
+    <div id="abcMemoryWritingView" class="hidden fixed inset-0 z-50 bg-slate-900/90 backdrop-blur-md flex-col">
+        <!-- Floating Header -->
+        <div class="bg-white/95 px-4 py-3 shadow-md flex flex-wrap justify-between items-center gap-2">
+            <div>
+                <h3 class="title-font text-lg sm:text-xl text-purple-600">A မှ Z ထိ မှတ်ဉာဏ်ဖြင့် ရေးသားရန် (Full Screen)</h3>
+                <p class="text-slate-500 text-xs">လေးကြောင်းစပ် (Four-line) စာအုပ်မျဉ်းပေါ်တွင် လွတ်လပ်စွာ ရေးသားပါ</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="memPenBtn" onclick="setMemTool('pen')" class="bg-purple-600 text-white px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1">
+                    <i class="fa-solid fa-pen"></i> ဘောပင်
+                </button>
+                <button id="memEraserBtn" onclick="setMemTool('eraser')" class="bg-slate-200 text-slate-700 px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1">
+                    <i class="fa-solid fa-eraser"></i> ဖျက်ဆေး
+                </button>
+                <button onclick="clearMemoryCanvas()" class="bg-rose-500 hover:bg-rose-600 text-white px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1">
+                    <i class="fa-solid fa-rotate-right"></i> အစမှ
+                </button>
+                <button onclick="exitMemoryWriting()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1">
+                    <i class="fa-solid fa-xmark"></i> ပြန်ထွက်
+                </button>
+            </div>
+        </div>
+        <!-- Full Screen Canvas Area -->
+        <div class="flex-grow relative overflow-auto bg-white notebook-page-exact w-full h-full">
+            <canvas id="memoryCanvas" class="drawing-board w-full" style="min-height: 1500px;"></canvas>
+        </div>
+    </div>
+
+    <!-- FULL SCREEN က-အ MEMORY WRITING MODAL -->
+    <div id="myanMemoryWritingView" class="hidden fixed inset-0 z-50 bg-slate-900/90 backdrop-blur-md flex-col">
+        <!-- Floating Header -->
+        <div class="bg-white/95 px-4 py-3 shadow-md flex flex-wrap justify-between items-center gap-2">
+            <div>
+                <h3 class="title-font text-lg sm:text-xl text-amber-600">က မှ အ ထိ မှတ်ဉာဏ်ဖြင့် ရေးသားရန် (33 လုံး)</h3>
+                <p class="text-slate-500 text-xs">လေးကြောင်းစပ် (Four-line) စာအုပ်မျဉ်းပေါ်တွင် လွတ်လပ်စွာ ရေးသားပါ</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="myanMemPenBtn" onclick="setMyanMemTool('pen')" class="bg-amber-600 text-white px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1">
+                    <i class="fa-solid fa-pen"></i> ဘောပင်
+                </button>
+                <button id="myanMemEraserBtn" onclick="setMyanMemTool('eraser')" class="bg-slate-200 text-slate-700 px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1">
+                    <i class="fa-solid fa-eraser"></i> ဖျက်ဆေး
+                </button>
+                <button onclick="clearMyanMemoryCanvas()" class="bg-rose-500 hover:bg-rose-600 text-white px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1">
+                    <i class="fa-solid fa-rotate-right"></i> အစမှ
+                </button>
+                <button onclick="exitMyanMemoryWriting()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1">
+                    <i class="fa-solid fa-xmark"></i> ပြန်ထွက်
+                </button>
+            </div>
+        </div>
+        <!-- Full Screen Canvas Area -->
+        <div class="flex-grow relative overflow-auto bg-white notebook-page-exact w-full h-full">
+            <canvas id="myanMemoryCanvas" class="drawing-board w-full" style="min-height: 1500px;"></canvas>
+        </div>
+    </div>
+
     <footer class="text-center py-4 text-slate-600 text-xs sm:text-sm font-semibold">
-        <p>ချစ်စရာ ကလေးငယ်များအတွက် မြန်မာသင်္ချာနှင့် အင်္ဂလိပ် ABC လေ့လာရန် ❤️🌟</p>
+        <p>ချစ်စရာ ကလေးငယ်များအတွက် မြန်မာသင်္ချာနှင့် အင်္ဂလိပ်/မြန်မာ အက္ခရာ လေ့လာရန် ❤️🌟</p>
     </footer>
 
     <script>
@@ -327,6 +542,19 @@
             { num: 20, burmeseNum: "၂၀", word: "နှစ်ဆယ်", icon: "fa-crown", color: "text-amber-500", bg: "bg-amber-200", border: "border-amber-500" }
         ];
 
+        const engNumberData = [
+            { num: 1, word: "One", icon: "fa-apple-whole" }, { num: 2, word: "Two", icon: "fa-star" },
+            { num: 3, word: "Three", icon: "fa-heart" }, { num: 4, word: "Four", icon: "fa-fish" },
+            { num: 5, word: "Five", icon: "fa-cookie" }, { num: 6, word: "Six", icon: "fa-ice-cream" },
+            { num: 7, word: "Seven", icon: "fa-moon" }, { num: 8, word: "Eight", icon: "fa-sun" },
+            { num: 9, word: "Nine", icon: "fa-leaf" }, { num: 10, word: "Ten", icon: "fa-rocket" },
+            { num: 11, word: "Eleven", icon: "fa-seedling" }, { num: 12, word: "Twelve", icon: "fa-gem" },
+            { num: 13, word: "Thirteen", icon: "fa-bell" }, { num: 14, word: "Fourteen", icon: "fa-carrot" },
+            { num: 15, word: "Fifteen", icon: "fa-candy-cane" }, { num: 16, word: "Sixteen", icon: "fa-pizza-slice" },
+            { num: 17, word: "Seventeen", icon: "fa-feather" }, { num: 18, word: "Eighteen", icon: "fa-umbrella" },
+            { num: 19, word: "Nineteen", icon: "fa-shield" }, { num: 20, word: "Twenty", icon: "fa-crown" }
+        ];
+
         const abcData = [
             { letter: "A", word: "Apple", icon: "🍎" }, { letter: "B", word: "Ball", icon: "⚽" },
             { letter: "C", word: "Cat", icon: "🐱" }, { letter: "D", word: "Dog", icon: "🐶" },
@@ -343,20 +571,56 @@
             { letter: "Y", word: "Yacht", icon: "⛵" }, { letter: "Z", word: "Zebra", icon: "🦓" }
         ];
 
+        // Exact Full 33 Burmese Consonants (က မှ အ ထိ)
+        const myanmarLettersData = [
+            { letter: "က", word: "ကြက်", icon: "🐓" }, { letter: "ခ", word: "ခတ̃င်း", icon: "🥚" },
+            { letter: "ဂ", word: "ဂါဝန်", icon: "👗" }, { letter: "ဃ", word: "ဃဏ", icon: "📜" },
+            { letter: "င", word: "ငါး", icon: "🐟" }, { letter: "စ", word: "စက္ကူ", icon: "📄" },
+            { letter: "ဆ", word: "ဆိတ်", icon: "🐐" }, { letter: "ဇ", word: "ဇလုံ", icon: "🥣" },
+            { letter: "ဈ", word: "ဈေး", icon: "🛒" }, { letter: "ဉ", word: "ဉာဏ်", icon: "💡" },
+            { letter: "ည", word: "ညောင်ပင်", icon: "🌳" }, { letter: "ဋ", word: "ဋ္ဌ", icon: "🛕" },
+            { letter: "ဌ", word: "ဌက်", icon: "🐦" }, { letter: "ဍ", word: "ဍင်", icon: "🏮" },
+            { letter: "ဎ", word: "ဎ", icon: "🏺" }, { letter: "ဏ", word: "ဏီ", icon: "📿" },
+            { letter: "တ", word: "လိပ်တလင်း", icon: "🐢" }, { letter: "ထ", word: "ထီး", icon: "☂️" },
+            { letter: "ဒ", word: "ဒေါင်း", icon: "🦚" }, { letter: "ဓ", word: "ဓား", icon: "🗡️" },
+            { letter: "န", word: "နွား", icon: "🐂" }, { letter: "ပ", word: "ပန်း", icon: "🌸" },
+            { letter: "ဖ", word: "ဖန်ခွက်", icon: "🥛" }, { letter: "ဗ", word: "ဗျိုင်း", icon: "🦢" },
+            { letter: "ဘ", word: "ဘောလုံး", icon: "⚽" }, { letter: "မ", word: "မီးသီး", icon: "💡" },
+            { letter: "ယ", word: "ယပ်", icon: "🪭" }, { letter: "ရ", word: "ရထား", icon: "🚂" },
+            { letter: "လ", word: "လ", icon: "🌙" }, { letter: "ဝ", word: "ဝက်", icon: "🐖" },
+            { letter: "သ", word: "သစ်သီး", icon: "🍎" }, { letter: "ဟ", word: "ဟင်္သာ", icon: "🦢" },
+            { letter: "အ", word: "အိမ်", icon: "🏠" }
+        ];
+
         let currentMainTab = 'numbers';
         let currentRange = 'all';
         let numSubMode = 'learn';
+        let engRange = 'all';
+        let engNumSubMode = 'learn';
         let abcSubMode = 'learn';
+        let myanSubMode = 'learn';
         let voiceTab = 'numbers';
         let currentActiveNum = null;
+        let currentActiveEngNum = null;
         let currentActiveAbc = null;
+        let currentActiveMyan = null;
         let clickedItemCount = 0;
+        let engClickedItemCount = 0;
         let quizScore = 0;
+        let engScore = 0;
         let currentQuizTarget = null;
+        let currentEngQuizTarget = null;
         let isAnsweringLocked = false;
         let abcScore = 0;
         let currentAbcQuizTarget = null;
+        let myanScore = 0;
+        let currentMyanQuizTarget = null;
         let activeTraceLetter = 'A';
+        let activeMyanTraceLetter = 'က';
+        let traceTool = 'pen';
+        let memTool = 'pen';
+        let myanTraceTool = 'pen';
+        let myanMemTool = 'pen';
 
         let customVoices = JSON.parse(localStorage.getItem('customVoices') || '{}');
 
@@ -419,31 +683,51 @@
         function switchMainTab(tab) {
             currentMainTab = tab;
             document.getElementById('numberSection').classList.add('hidden');
+            document.getElementById('engNumberSection').classList.add('hidden');
             document.getElementById('abcSection').classList.add('hidden');
+            document.getElementById('myanLetterSection').classList.add('hidden');
             document.getElementById('voiceSection').classList.add('hidden');
+            
+            const abcMem = document.getElementById('abcMemoryWritingView');
+            abcMem.classList.add('hidden');
+            abcMem.classList.remove('flex');
 
-            document.getElementById('mainTabNumbers').className = "px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm";
-            document.getElementById('mainTabAbc').className = "px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm";
-            document.getElementById('mainTabVoice').className = "px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm";
+            const myanMem = document.getElementById('myanMemoryWritingView');
+            myanMem.classList.add('hidden');
+            myanMem.classList.remove('flex');
+
+            document.getElementById('mainTabNumbers').className = "px-2.5 py-1.5 rounded-full title-font text-xs transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm";
+            document.getElementById('mainTabEngNumbers').className = "px-2.5 py-1.5 rounded-full title-font text-xs transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm";
+            document.getElementById('mainTabAbc').className = "px-2.5 py-1.5 rounded-full title-font text-xs transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm";
+            document.getElementById('mainTabMyanmarLetters').className = "px-2.5 py-1.5 rounded-full title-font text-xs transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm";
+            document.getElementById('mainTabVoice').className = "px-2.5 py-1.5 rounded-full title-font text-xs transition-all text-slate-600 hover:text-pink-500 bg-white shadow-sm";
 
             window.speechSynthesis.cancel();
 
             if (tab === 'numbers') {
                 document.getElementById('numberSection').classList.remove('hidden');
-                document.getElementById('mainTabNumbers').className = "px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all bg-pink-500 text-white shadow-md";
+                document.getElementById('mainTabNumbers').className = "px-2.5 py-1.5 rounded-full title-font text-xs transition-all bg-pink-500 text-white shadow-md";
                 initLearnCards();
+            } else if (tab === 'engNumbers') {
+                document.getElementById('engNumberSection').classList.remove('hidden');
+                document.getElementById('mainTabEngNumbers').className = "px-2.5 py-1.5 rounded-full title-font text-xs transition-all bg-teal-500 text-white shadow-md";
+                initEngLearnCards();
             } else if (tab === 'abc') {
                 document.getElementById('abcSection').classList.remove('hidden');
-                document.getElementById('mainTabAbc').className = "px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all bg-purple-500 text-white shadow-md";
+                document.getElementById('mainTabAbc').className = "px-2.5 py-1.5 rounded-full title-font text-xs transition-all bg-purple-500 text-white shadow-md";
                 initAbcCards();
+            } else if (tab === 'myanmarLetters') {
+                document.getElementById('myanLetterSection').classList.remove('hidden');
+                document.getElementById('mainTabMyanmarLetters').className = "px-2.5 py-1.5 rounded-full title-font text-xs transition-all bg-amber-500 text-white shadow-md";
+                initMyanCards();
             } else if (tab === 'voice') {
                 document.getElementById('voiceSection').classList.remove('hidden');
-                document.getElementById('mainTabVoice').className = "px-3 py-1.5 rounded-full title-font text-xs sm:text-sm transition-all bg-amber-500 text-white shadow-md";
+                document.getElementById('mainTabVoice').className = "px-2.5 py-1.5 rounded-full title-font text-xs transition-all bg-amber-500 text-white shadow-md";
                 initVoiceManager();
             }
         }
 
-        // ================= NUMBER LOGIC =================
+        // ================= NUMBER LOGIC (BURMESE) =================
         function setNumberRange(range) {
             currentRange = range;
             document.getElementById('range1to10').className = range === '1-10' ? "px-3 py-1 rounded-full title-font text-xs bg-amber-500 text-white shadow" : "px-3 py-1 rounded-full title-font text-xs text-amber-800 hover:bg-amber-200";
@@ -617,12 +901,185 @@
             }
         }
 
+        // ================= ENGLISH NUMBER LOGIC (1-20) =================
+        function setEngNumberRange(range) {
+            engRange = range;
+            document.getElementById('engRange1to10').className = range === '1-10' ? "px-3 py-1 rounded-full title-font text-xs bg-teal-500 text-white shadow" : "px-3 py-1 rounded-full title-font text-xs text-teal-800 hover:bg-teal-200";
+            document.getElementById('engRange11to20').className = range === '11-20' ? "px-3 py-1 rounded-full title-font text-xs bg-teal-500 text-white shadow" : "px-3 py-1 rounded-full title-font text-xs text-teal-800 hover:bg-teal-200";
+            document.getElementById('engRangeAll').className = range === 'all' ? "px-3 py-1 rounded-full title-font text-xs bg-teal-500 text-white shadow" : "px-3 py-1 rounded-full title-font text-xs text-teal-800 hover:bg-teal-200";
+            initEngLearnCards();
+        }
+
+        function switchEngNumSubMode(sub) {
+            engNumSubMode = sub;
+            document.getElementById('engNumLearnView').classList.add('hidden');
+            document.getElementById('engNumGameView').classList.add('hidden');
+            document.getElementById('engNumSubTabLearn').className = "px-3 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-teal-500";
+            document.getElementById('engNumSubTabGame').className = "px-3 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-teal-500";
+
+            if (sub === 'learn') {
+                document.getElementById('engNumLearnView').classList.remove('hidden');
+                document.getElementById('engNumSubTabLearn').className = "px-3 py-1.5 rounded-full title-font text-xs bg-teal-500 text-white shadow";
+            } else {
+                document.getElementById('engNumGameView').classList.remove('hidden');
+                document.getElementById('engNumSubTabGame').className = "px-3 py-1.5 rounded-full title-font text-xs bg-teal-500 text-white shadow";
+                startEngQuizRound();
+            }
+        }
+
+        function initEngLearnCards() {
+            const container = document.getElementById('engNumberCardsContainer');
+            container.innerHTML = '';
+            let filtered = engNumberData;
+            if (engRange === '1-10') filtered = engNumberData.slice(0, 10);
+            else if (engRange === '11-20') filtered = engNumberData.slice(10, 20);
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl p-3 shadow-md border-4 border-teal-300 flex flex-col items-center justify-center cursor-pointer transition-all hover:scale-105 active:scale-95 group";
+                card.innerHTML = `
+                    <div class="w-10 h-10 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-lg mb-1 group-hover:rotate-12 transition-transform">
+                        <i class="fa-solid ${item.icon}"></i>
+                    </div>
+                    <span class="title-font text-3xl sm:text-4xl text-teal-600">${item.num}</span>
+                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-0.5">${item.word}</span>
+                `;
+                card.onclick = () => selectEngNumber(item.num);
+                container.appendChild(card);
+            });
+        }
+
+        function selectEngNumber(num) {
+            currentActiveEngNum = num;
+            const data = engNumberData[num - 1];
+            engClickedItemCount = 0;
+
+            document.getElementById('engStageDefault').classList.add('hidden');
+            const stageActive = document.getElementById('engStageActive');
+            stageActive.classList.remove('hidden');
+
+            document.getElementById('engActiveDigit').innerText = data.num;
+            document.getElementById('engActiveWord').innerText = data.word;
+            document.getElementById('engCountingProgressText').innerText = `Click objects to count (0 / ${data.num})`;
+
+            const objContainer = document.getElementById('engObjectContainer');
+            objContainer.innerHTML = '';
+
+            for (let i = 0; i < data.num; i++) {
+                const obj = document.createElement('div');
+                obj.className = "w-12 h-12 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-xl shadow-md cursor-pointer transition-all duration-300 transform scale-0 hover:scale-110 active:scale-90";
+                obj.innerHTML = `<i class="fa-solid ${data.icon}"></i>`;
+                
+                obj.onclick = (e) => {
+                    e.stopPropagation();
+                    if (!obj.dataset.counted) {
+                        obj.dataset.counted = "true";
+                        engClickedItemCount++;
+                        obj.classList.add('opacity-50', 'scale-90');
+                        playSound('pop');
+                        
+                        playKeyVoice(`engnum_${engClickedItemCount}`, `${engClickedItemCount}`);
+                        document.getElementById('engCountingProgressText').innerText = `Counted: ${engClickedItemCount} / ${data.num}`;
+
+                        if (engClickedItemCount === data.num) {
+                            playKeyVoice(`engnum_${num}`, `${data.word}`);
+                            confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+                        }
+                    }
+                };
+                objContainer.appendChild(obj);
+                setTimeout(() => {
+                    obj.classList.remove('scale-0');
+                    obj.classList.add('scale-100');
+                }, i * 40);
+            }
+            playKeyVoice(`engnum_${num}`, `${data.word}`);
+        }
+
+        function repeatEngSpeech() {
+            if (currentActiveEngNum !== null) {
+                const data = engNumberData[currentActiveEngNum - 1];
+                playKeyVoice(`engnum_${currentActiveEngNum}`, `${data.word}`);
+            }
+        }
+
+        function startEngQuizRound() {
+            isAnsweringLocked = false;
+            document.getElementById('engQuizFeedback').innerHTML = '';
+            document.getElementById('engNextQuestionBtn').classList.add('hidden');
+
+            let minNum = 1, maxNum = 20;
+            if (engRange === '1-10') { maxNum = 10; }
+            else if (engRange === '11-20') { minNum = 11; maxNum = 20; }
+
+            currentEngQuizTarget = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
+            const targetData = engNumberData[currentEngQuizTarget - 1];
+
+            const quizObjsContainer = document.getElementById('engQuizObjectsContainer');
+            quizObjsContainer.innerHTML = '';
+
+            for (let i = 0; i < currentEngQuizTarget; i++) {
+                const el = document.createElement('div');
+                el.className = "w-10 h-10 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-xl shadow-sm floating";
+                el.style.animationDelay = `${(i * 0.1)}s`;
+                el.innerHTML = `<i class="fa-solid ${targetData.icon}"></i>`;
+                quizObjsContainer.appendChild(el);
+            }
+
+            speakText("How many items?");
+
+            let options = [currentEngQuizTarget];
+            while (options.length < 5) {
+                let rand = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
+                if (!options.includes(rand)) options.push(rand);
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('engQuizOptionsContainer');
+            optionsContainer.innerHTML = '';
+
+            options.forEach(opt => {
+                const optData = engNumberData[opt - 1];
+                const btn = document.createElement('button');
+                btn.className = "bg-white hover:bg-teal-50 border-4 border-teal-200 text-teal-600 py-3 rounded-2xl title-font text-2xl sm:text-3xl shadow-md flex flex-col items-center justify-center";
+                btn.innerHTML = `<span>${optData.num}</span><span class="text-[11px] text-slate-400 font-semibold">${optData.word}</span>`;
+                btn.onclick = () => checkEngQuizAnswer(opt, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkEngQuizAnswer(selectedNum, btnElement) {
+            if (isAnsweringLocked) return;
+            const feedback = document.getElementById('engQuizFeedback');
+            const scoreDisplay = document.getElementById('engScoreVal');
+
+            if (selectedNum === currentEngQuizTarget) {
+                isAnsweringLocked = true;
+                playSound('success');
+                engScore += 10;
+                scoreDisplay.innerText = engScore;
+                btnElement.classList.remove('bg-white', 'border-teal-200', 'text-teal-600');
+                btnElement.classList.add('bg-emerald-500', 'border-emerald-600', 'text-white', 'bounce-active');
+                feedback.innerHTML = '<span class="text-emerald-600 animate-bounce">⭐ Correct! Great job ⭐</span>';
+                speakText("Correct!");
+                confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+                document.getElementById('engNextQuestionBtn').classList.remove('hidden');
+            } else {
+                playSound('wrong');
+                btnElement.classList.add('opacity-50', 'bg-rose-100');
+                feedback.innerHTML = '<span class="text-rose-500">Try again! 🎈</span>';
+                speakText("Try again");
+            }
+        }
+
         // ================= ABC LOGIC =================
         function switchAbcSubMode(sub) {
             abcSubMode = sub;
             document.getElementById('abcLearnView').classList.add('hidden');
             document.getElementById('abcTraceView').classList.add('hidden');
-            document.getElementById('abcMemoryWritingView').classList.add('hidden');
+            const memView = document.getElementById('abcMemoryWritingView');
+            memView.classList.add('hidden');
+            memView.classList.remove('flex');
             document.getElementById('abcQuizView').classList.add('hidden');
             
             document.getElementById('abcSubTabLearn').className = "px-2.5 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-purple-500";
@@ -639,7 +1096,8 @@
                 document.getElementById('abcSubTabTrace').className = "px-2.5 py-1.5 rounded-full title-font text-xs bg-purple-500 text-white shadow";
                 initTracePicker();
             } else if (sub === 'memory') {
-                document.getElementById('abcMemoryWritingView').classList.remove('hidden');
+                memView.classList.remove('hidden');
+                memView.classList.add('flex');
                 document.getElementById('abcSubTabMemory').className = "px-2.5 py-1.5 rounded-full title-font text-xs bg-purple-500 text-white shadow";
                 initMemoryCanvas();
             } else {
@@ -647,6 +1105,13 @@
                 document.getElementById('abcSubTabQuiz').className = "px-2.5 py-1.5 rounded-full title-font text-xs bg-purple-500 text-white shadow";
                 startAbcQuizRound();
             }
+        }
+
+        function exitMemoryWriting() {
+            const memView = document.getElementById('abcMemoryWritingView');
+            memView.classList.add('hidden');
+            memView.classList.remove('flex');
+            switchAbcSubMode('learn');
         }
 
         function initAbcCards() {
@@ -683,10 +1148,21 @@
             }
         }
 
-        // Single letter trace canvas setup
+        // Single letter trace canvas setup (ABC)
         let isDrawing = false;
         const canvas = document.getElementById('traceCanvas');
         const ctx = canvas.getContext('2d');
+
+        function setTraceTool(tool) {
+            traceTool = tool;
+            if (tool === 'pen') {
+                document.getElementById('tracePenBtn').className = "bg-purple-600 text-white px-3 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+                document.getElementById('traceEraserBtn').className = "bg-slate-200 text-slate-700 px-3 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+            } else {
+                document.getElementById('traceEraserBtn').className = "bg-purple-600 text-white px-3 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+                document.getElementById('tracePenBtn').className = "bg-slate-200 text-slate-700 px-3 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+            }
+        }
 
         function initTracePicker() {
             const picker = document.getElementById('traceLetterPicker');
@@ -727,6 +1203,18 @@
             document.getElementById('traceFeedback').innerText = '';
         }
 
+        // Auto Font-Style / Beautify Feature for ABC Tracing
+        function beautifyTraceCanvas() {
+            drawTraceTemplate();
+            ctx.font = 'bold 160px Quicksand, sans-serif';
+            ctx.fillStyle = '#9333ea';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(activeTraceLetter, canvas.width / 2, canvas.height / 2);
+            playSound('success');
+            confetti({ particleCount: 30, spread: 40, origin: { y: 0.6 } });
+        }
+
         canvas.addEventListener('mousedown', startDrawing);
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mouseup', stopDrawing);
@@ -751,8 +1239,9 @@
             const pos = getMousePos(e, canvas);
             ctx.beginPath();
             ctx.moveTo(pos.x, pos.y);
+            ctx.globalCompositeOperation = traceTool === 'eraser' ? 'destination-out' : 'source-over';
             ctx.strokeStyle = '#9333ea';
-            ctx.lineWidth = 8;
+            ctx.lineWidth = traceTool === 'eraser' ? 35 : 8;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
         }
@@ -766,6 +1255,7 @@
 
         function stopDrawing() {
             isDrawing = false;
+            ctx.globalCompositeOperation = 'source-over';
         }
 
         function checkTracing() {
@@ -775,18 +1265,31 @@
             confetti({ particleCount: 50, spread: 50, origin: { y: 0.6 } });
         }
 
-        // ================= A-Z MEMORY WRITING NOTEBOOK CANVAS =================
+        // ================= FULL SCREEN A-Z MEMORY WRITING NOTEBOOK CANVAS =================
         const memCanvas = document.getElementById('memoryCanvas');
         const memCtx = memCanvas.getContext('2d');
         let isMemDrawing = false;
 
+        function setMemTool(tool) {
+            memTool = tool;
+            if (tool === 'pen') {
+                document.getElementById('memPenBtn').className = "bg-purple-600 text-white px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+                document.getElementById('memEraserBtn').className = "bg-slate-200 text-slate-700 px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+            } else {
+                document.getElementById('memEraserBtn').className = "bg-purple-600 text-white px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+                document.getElementById('memPenBtn').className = "bg-slate-200 text-slate-700 px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+            }
+        }
+
         function initMemoryCanvas() {
+            memCanvas.width = window.innerWidth * window.devicePixelRatio;
+            memCanvas.height = 3000;
+            memCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
             clearMemoryCanvas();
         }
 
         function clearMemoryCanvas() {
             memCtx.clearRect(0, 0, memCanvas.width, memCanvas.height);
-            document.getElementById('memoryFeedback').innerHTML = '';
         }
 
         memCanvas.addEventListener('mousedown', (e) => {
@@ -794,8 +1297,9 @@
             const pos = getMousePos(e, memCanvas);
             memCtx.beginPath();
             memCtx.moveTo(pos.x, pos.y);
+            memCtx.globalCompositeOperation = memTool === 'eraser' ? 'destination-out' : 'source-over';
             memCtx.strokeStyle = '#1e293b';
-            memCtx.lineWidth = 4;
+            memCtx.lineWidth = memTool === 'eraser' ? 45 : 4;
             memCtx.lineCap = 'round';
             memCtx.lineJoin = 'round';
         });
@@ -807,16 +1311,17 @@
             memCtx.stroke();
         });
 
-        memCanvas.addEventListener('mouseup', () => { isMemDrawing = false; });
-        memCanvas.addEventListener('mouseleave', () => { isMemDrawing = false; });
+        memCanvas.addEventListener('mouseup', () => { isMemDrawing = false; memCtx.globalCompositeOperation = 'source-over'; });
+        memCanvas.addEventListener('mouseleave', () => { isMemDrawing = false; memCtx.globalCompositeOperation = 'source-over'; });
 
         memCanvas.addEventListener('touchstart', (e) => {
             isMemDrawing = true;
             const pos = getMousePos(e.touches[0], memCanvas);
             memCtx.beginPath();
             memCtx.moveTo(pos.x, pos.y);
+            memCtx.globalCompositeOperation = memTool === 'eraser' ? 'destination-out' : 'source-over';
             memCtx.strokeStyle = '#1e293b';
-            memCtx.lineWidth = 4;
+            memCtx.lineWidth = memTool === 'eraser' ? 45 : 4;
             memCtx.lineCap = 'round';
             memCtx.lineJoin = 'round';
             e.preventDefault();
@@ -830,28 +1335,7 @@
             e.preventDefault();
         }, {passive: false});
 
-        memCanvas.addEventListener('touchend', () => { isMemDrawing = false; });
-
-        function submitMemoryWriting() {
-            const pixelData = memCtx.getImageData(0, 0, memCanvas.width, memCanvas.height).data;
-            let drawnPixels = 0;
-            for (let i = 3; i < pixelData.length; i += 4) {
-                if (pixelData[i] > 50) drawnPixels++;
-            }
-
-            const feedback = document.getElementById('memoryFeedback');
-            if (drawnPixels < 200) {
-                playSound('wrong');
-                feedback.innerHTML = '<span class="text-rose-500">❌ ကျေးဇူးပြု၍ စာအုပ်မျဉ်းအတွင်း A မှ Z ထိ အရင်ရေးသားပါ</span>';
-                speakText("Please write letters A to Z first");
-                return;
-            }
-
-            playSound('success');
-            confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 } });
-            feedback.innerHTML = '<span class="text-emerald-600 animate-bounce">🏆 ဂုဏ်ယူပါတယ်! A မှ Z ထိ အစဉ်လိုက် မှန်ကန်စွာ ရေးသားနိုင်ပါပြီ။ ရမှတ်: 100/100 🌟</span>';
-            speakText("Amazing! You wrote A to Z successfully!");
-        }
+        memCanvas.addEventListener('touchend', () => { isMemDrawing = false; memCtx.globalCompositeOperation = 'source-over'; });
 
         // ABC Quiz
         function startAbcQuizRound() {
@@ -909,11 +1393,324 @@
             }
         }
 
+        // ================= MYANMAR LETTER LOGIC (33 Letters) =================
+        function switchMyanSubMode(sub) {
+            myanSubMode = sub;
+            document.getElementById('myanLearnView').classList.add('hidden');
+            document.getElementById('myanTraceView').classList.add('hidden');
+            const myanMemView = document.getElementById('myanMemoryWritingView');
+            myanMemView.classList.add('hidden');
+            myanMemView.classList.remove('flex');
+            document.getElementById('myanQuizView').classList.add('hidden');
+            
+            document.getElementById('myanSubTabLearn').className = "px-2.5 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-amber-600";
+            document.getElementById('myanSubTabTrace').className = "px-2.5 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-amber-600";
+            document.getElementById('myanSubTabMemory').className = "px-2.5 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-amber-600";
+            document.getElementById('myanSubTabQuiz').className = "px-2.5 py-1.5 rounded-full title-font text-xs text-slate-600 hover:text-amber-600";
+
+            if (sub === 'learn') {
+                document.getElementById('myanLearnView').classList.remove('hidden');
+                document.getElementById('myanSubTabLearn').className = "px-2.5 py-1.5 rounded-full title-font text-xs bg-amber-500 text-white shadow";
+                initMyanCards();
+            } else if (sub === 'trace') {
+                document.getElementById('myanTraceView').classList.remove('hidden');
+                document.getElementById('myanSubTabTrace').className = "px-2.5 py-1.5 rounded-full title-font text-xs bg-amber-500 text-white shadow";
+                initMyanTracePicker();
+            } else if (sub === 'memory') {
+                myanMemView.classList.remove('hidden');
+                myanMemView.classList.add('flex');
+                document.getElementById('myanSubTabMemory').className = "px-2.5 py-1.5 rounded-full title-font text-xs bg-amber-500 text-white shadow";
+                initMyanMemoryCanvas();
+            } else {
+                document.getElementById('myanQuizView').classList.remove('hidden');
+                document.getElementById('myanSubTabQuiz').className = "px-2.5 py-1.5 rounded-full title-font text-xs bg-amber-500 text-white shadow";
+                startMyanQuizRound();
+            }
+        }
+
+        function exitMyanMemoryWriting() {
+            const myanMemView = document.getElementById('myanMemoryWritingView');
+            myanMemView.classList.add('hidden');
+            myanMemView.classList.remove('flex');
+            switchMyanSubMode('learn');
+        }
+
+        function initMyanCards() {
+            const container = document.getElementById('myanCardsContainer');
+            container.innerHTML = '';
+            myanmarLettersData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl p-2.5 shadow-md border-3 border-amber-200 flex flex-col items-center justify-center cursor-pointer transition-all hover:scale-105 active:scale-95 group";
+                card.innerHTML = `
+                    <span class="text-xl mb-0.5">${item.icon}</span>
+                    <span class="title-font text-2xl sm:text-3xl text-amber-600 group-hover:rotate-6">${item.letter}</span>
+                    <span class="text-[9px] text-slate-400 font-bold uppercase">${item.word}</span>
+                `;
+                card.onclick = () => selectMyanCard(item);
+                container.appendChild(card);
+            });
+        }
+
+        function selectMyanCard(item) {
+            currentActiveMyan = item;
+            document.getElementById('myanStageDefault').classList.add('hidden');
+            const stageActive = document.getElementById('myanStageActive');
+            stageActive.classList.remove('hidden');
+
+            document.getElementById('myanActiveLetter').innerText = item.letter;
+            document.getElementById('myanActiveVocabIcon').innerText = item.icon;
+            document.getElementById('myanActiveVocabWord').innerText = `${item.letter} - ${item.word}`;
+            playKeyVoice(`myan_${item.letter}`, `${item.letter}။ ${item.word}။`);
+        }
+
+        function speakMyanActive() {
+            if (currentActiveMyan) {
+                playKeyVoice(`myan_${currentActiveMyan.letter}`, `${currentActiveMyan.letter}။ ${currentActiveMyan.word}။`);
+            }
+        }
+
+        // Single letter trace canvas setup (Myanmar)
+        let isMyanDrawing = false;
+        const myanCanvas = document.getElementById('myanTraceCanvas');
+        const myanCtx = myanCanvas.getContext('2d');
+
+        function setMyanTraceTool(tool) {
+            myanTraceTool = tool;
+            if (tool === 'pen') {
+                document.getElementById('myanTracePenBtn').className = "bg-amber-600 text-white px-3 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+                document.getElementById('myanTraceEraserBtn').className = "bg-slate-200 text-slate-700 px-3 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+            } else {
+                document.getElementById('myanTraceEraserBtn').className = "bg-amber-600 text-white px-3 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+                document.getElementById('myanTracePenBtn').className = "bg-slate-200 text-slate-700 px-3 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+            }
+        }
+
+        function initMyanTracePicker() {
+            const picker = document.getElementById('myanTraceLetterPicker');
+            picker.innerHTML = '';
+            myanmarLettersData.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = `w-9 h-9 rounded-xl title-font text-xs sm:text-sm shadow transition-all ${activeMyanTraceLetter === item.letter ? 'bg-amber-600 text-white scale-110' : 'bg-amber-100 text-amber-800 hover:bg-amber-200'}`;
+                btn.innerText = item.letter;
+                btn.onclick = () => {
+                    activeMyanTraceLetter = item.letter;
+                    initMyanTracePicker();
+                    drawMyanTraceTemplate();
+                };
+                picker.appendChild(btn);
+            });
+            drawMyanTraceTemplate();
+        }
+
+        function drawMyanTraceTemplate() {
+            myanCtx.clearRect(0, 0, myanCanvas.width, myanCanvas.height);
+            myanCtx.strokeStyle = '#e2e8f0';
+            myanCtx.lineWidth = 2;
+            myanCtx.setLineDash([5, 5]);
+            myanCtx.beginPath();
+            myanCtx.arc(myanCanvas.width/2, myanCanvas.height/2, 110, 0, Math.PI * 2);
+            myanCtx.stroke();
+            myanCtx.setLineDash([]);
+
+            myanCtx.font = 'bold 130px Padauk, sans-serif';
+            myanCtx.fillStyle = '#f1f5f9';
+            myanCtx.textAlign = 'center';
+            myanCtx.textBaseline = 'middle';
+            myanCtx.fillText(activeMyanTraceLetter, myanCanvas.width / 2, myanCanvas.height / 2);
+        }
+
+        function clearMyanTraceCanvas() {
+            drawMyanTraceTemplate();
+            document.getElementById('myanTraceFeedback').innerText = '';
+        }
+
+        // Auto Font-Style / Beautifier Feature for Myanmar Tracing
+        function beautifyMyanTraceCanvas() {
+            drawMyanTraceTemplate();
+            myanCtx.font = 'bold 140px Padauk, sans-serif';
+            myanCtx.fillStyle = '#d97706';
+            myanCtx.textAlign = 'center';
+            myanCtx.textBaseline = 'middle';
+            myanCtx.fillText(activeMyanTraceLetter, myanCanvas.width / 2, myanCanvas.height / 2);
+            playSound('success');
+            confetti({ particleCount: 30, spread: 40, origin: { y: 0.6 } });
+        }
+
+        myanCanvas.addEventListener('mousedown', startMyanDrawing);
+        myanCanvas.addEventListener('mousemove', drawMyan);
+        myanCanvas.addEventListener('mouseup', stopMyanDrawing);
+        myanCanvas.addEventListener('mouseleave', stopMyanDrawing);
+        
+        myanCanvas.addEventListener('touchstart', (e) => { startMyanDrawing(e.touches[0]); e.preventDefault(); }, {passive: false});
+        myanCanvas.addEventListener('touchmove', (e) => { drawMyan(e.touches[0]); e.preventDefault(); }, {passive: false});
+        myanCanvas.addEventListener('touchend', stopMyanDrawing);
+
+        function startMyanDrawing(e) {
+            isMyanDrawing = true;
+            const pos = getMousePos(e, myanCanvas);
+            myanCtx.beginPath();
+            myanCtx.moveTo(pos.x, pos.y);
+            myanCtx.globalCompositeOperation = myanTraceTool === 'eraser' ? 'destination-out' : 'source-over';
+            myanCtx.strokeStyle = '#d97706';
+            myanCtx.lineWidth = myanTraceTool === 'eraser' ? 35 : 8;
+            myanCtx.lineCap = 'round';
+            myanCtx.lineJoin = 'round';
+        }
+
+        function drawMyan(e) {
+            if (!isMyanDrawing) return;
+            const pos = getMousePos(e, myanCanvas);
+            myanCtx.lineTo(pos.x, pos.y);
+            myanCtx.stroke();
+        }
+
+        function stopMyanDrawing() {
+            isMyanDrawing = false;
+            myanCtx.globalCompositeOperation = 'source-over';
+        }
+
+        function checkMyanTracing() {
+            playSound('success');
+            document.getElementById('myanTraceFeedback').innerHTML = '<span class="text-emerald-600">✨ အလွန်တော်ပါသည်! ကောင်းစွာ ရေးသားနိုင်ပါသည် ✨</span>';
+            speakText("အရမ်းတော်တာပဲ");
+            confetti({ particleCount: 50, spread: 50, origin: { y: 0.6 } });
+        }
+
+        // ================= FULL SCREEN က-အ MEMORY WRITING NOTEBOOK CANVAS =================
+        const myanMemCanvas = document.getElementById('myanMemoryCanvas');
+        const myanMemCtx = myanMemCanvas.getContext('2d');
+        let isMyanMemDrawing = false;
+
+        function setMyanMemTool(tool) {
+            myanMemTool = tool;
+            if (tool === 'pen') {
+                document.getElementById('myanMemPenBtn').className = "bg-amber-600 text-white px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+                document.getElementById('myanMemEraserBtn').className = "bg-slate-200 text-slate-700 px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+            } else {
+                document.getElementById('myanMemEraserBtn').className = "bg-amber-600 text-white px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+                document.getElementById('myanMemPenBtn').className = "bg-slate-200 text-slate-700 px-3.5 py-2 rounded-xl title-font text-xs shadow flex items-center gap-1";
+            }
+        }
+
+        function initMyanMemoryCanvas() {
+            myanMemCanvas.width = window.innerWidth * window.devicePixelRatio;
+            myanMemCanvas.height = 3000;
+            myanMemCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            clearMyanMemoryCanvas();
+        }
+
+        function clearMyanMemoryCanvas() {
+            myanMemCtx.clearRect(0, 0, myanMemCanvas.width, myanMemCanvas.height);
+        }
+
+        myanMemCanvas.addEventListener('mousedown', (e) => {
+            isMyanMemDrawing = true;
+            const pos = getMousePos(e, myanMemCanvas);
+            myanMemCtx.beginPath();
+            myanMemCtx.moveTo(pos.x, pos.y);
+            myanMemCtx.globalCompositeOperation = myanMemTool === 'eraser' ? 'destination-out' : 'source-over';
+            myanMemCtx.strokeStyle = '#1e293b';
+            myanMemCtx.lineWidth = myanMemTool === 'eraser' ? 45 : 4;
+            myanMemCtx.lineCap = 'round';
+            myanMemCtx.lineJoin = 'round';
+        });
+
+        myanMemCanvas.addEventListener('mousemove', (e) => {
+            if (!isMyanMemDrawing) return;
+            const pos = getMousePos(e, myanMemCanvas);
+            myanMemCtx.lineTo(pos.x, pos.y);
+            myanMemCtx.stroke();
+        });
+
+        myanMemCanvas.addEventListener('mouseup', () => { isMyanMemDrawing = false; myanMemCtx.globalCompositeOperation = 'source-over'; });
+        myanMemCanvas.addEventListener('mouseleave', () => { isMyanMemDrawing = false; myanMemCtx.globalCompositeOperation = 'source-over'; });
+
+        myanMemCanvas.addEventListener('touchstart', (e) => {
+            isMyanMemDrawing = true;
+            const pos = getMousePos(e.touches[0], myanMemCanvas);
+            myanMemCtx.beginPath();
+            myanMemCtx.moveTo(pos.x, pos.y);
+            myanMemCtx.globalCompositeOperation = myanMemTool === 'eraser' ? 'destination-out' : 'source-over';
+            myanMemCtx.strokeStyle = '#1e293b';
+            myanMemCtx.lineWidth = myanMemTool === 'eraser' ? 45 : 4;
+            myanMemCtx.lineCap = 'round';
+            myanMemCtx.lineJoin = 'round';
+            e.preventDefault();
+        }, {passive: false});
+
+        myanMemCanvas.addEventListener('touchmove', (e) => {
+            if (!isMyanMemDrawing) return;
+            const pos = getMousePos(e.touches[0], myanMemCanvas);
+            myanMemCtx.lineTo(pos.x, pos.y);
+            myanMemCtx.stroke();
+            e.preventDefault();
+        }, {passive: false});
+
+        myanMemCanvas.addEventListener('touchend', () => { isMyanMemDrawing = false; myanMemCtx.globalCompositeOperation = 'source-over'; });
+
+        // Myanmar Quiz
+        function startMyanQuizRound() {
+            isAnsweringLocked = false;
+            document.getElementById('myanQuizFeedback').innerHTML = '';
+            document.getElementById('myanNextQuestionBtn').classList.add('hidden');
+
+            const randomIndex = Math.floor(Math.random() * myanmarLettersData.length);
+            currentMyanQuizTarget = myanmarLettersData[randomIndex];
+
+            document.getElementById('myanQuizIcon').innerText = currentMyanQuizTarget.icon;
+            document.getElementById('myanQuizHintText').innerText = currentMyanQuizTarget.word;
+            speakText(`${currentMyanQuizTarget.word} ဆိုတဲ့ ဗျည်းက ဘယ်ဟာလဲ?`);
+
+            let options = [currentMyanQuizTarget.letter];
+            while (options.length < 4) {
+                const randItem = myanmarLettersData[Math.floor(Math.random() * myanmarLettersData.length)];
+                if (!options.includes(randItem.letter)) options.push(randItem.letter);
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('myanQuizOptionsContainer');
+            optionsContainer.innerHTML = '';
+
+            options.forEach(optLetter => {
+                const btn = document.createElement('button');
+                btn.className = "bg-white hover:bg-amber-50 border-4 border-amber-200 text-amber-600 py-3 rounded-2xl title-font text-3xl shadow-md flex items-center justify-center";
+                btn.innerText = optLetter;
+                btn.onclick = () => checkMyanQuizAnswer(optLetter, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkMyanQuizAnswer(selectedLetter, btnElement) {
+            if (isAnsweringLocked) return;
+            const feedback = document.getElementById('myanQuizFeedback');
+            const scoreDisplay = document.getElementById('myanScoreVal');
+
+            if (selectedLetter === currentMyanQuizTarget.letter) {
+                isAnsweringLocked = true;
+                playSound('success');
+                myanScore += 10;
+                scoreDisplay.innerText = myanScore;
+                btnElement.classList.remove('bg-white', 'border-amber-200', 'text-amber-600');
+                btnElement.classList.add('bg-emerald-500', 'border-emerald-600', 'text-white', 'bounce-active');
+                feedback.innerHTML = '<span class="text-emerald-600 animate-bounce">⭐ မှန်ကန်ပါသည်! အလွန်တော်ပါသည် ⭐</span>';
+                speakText("မှန်ပါတယ်!");
+                confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
+                document.getElementById('myanNextQuestionBtn').classList.remove('hidden');
+            } else {
+                playSound('wrong');
+                btnElement.classList.add('opacity-50', 'bg-rose-100');
+                feedback.innerHTML = '<span class="text-rose-500">မှားယွင်းနေပါသည်။ ထပ်ကြိုးစားပါ! 🎈</span>';
+                speakText("ထပ်ကြိုးစားပါ");
+            }
+        }
+
         // ================= VOICE RECORDING MANAGER =================
         function switchVoiceTab(tab) {
             voiceTab = tab;
-            document.getElementById('voiceTabNum').className = tab === 'numbers' ? "px-4 py-1.5 rounded-full title-font text-xs sm:text-sm bg-amber-500 text-white shadow" : "px-4 py-1.5 rounded-full title-font text-xs sm:text-sm text-amber-900 hover:bg-amber-200";
-            document.getElementById('voiceTabAbc').className = tab === 'abc' ? "px-4 py-1.5 rounded-full title-font text-xs sm:text-sm bg-amber-500 text-white shadow" : "px-4 py-1.5 rounded-full title-font text-xs sm:text-sm text-amber-900 hover:bg-amber-200";
+            document.getElementById('voiceTabNum').className = tab === 'numbers' ? "px-3 py-1.5 rounded-full title-font text-xs bg-amber-500 text-white shadow" : "px-3 py-1.5 rounded-full title-font text-xs text-amber-900 hover:bg-amber-200";
+            document.getElementById('voiceTabEngNum').className = tab === 'engNumbers' ? "px-3 py-1.5 rounded-full title-font text-xs bg-amber-500 text-white shadow" : "px-3 py-1.5 rounded-full title-font text-xs text-amber-900 hover:bg-amber-200";
+            document.getElementById('voiceTabAbc').className = tab === 'abc' ? "px-3 py-1.5 rounded-full title-font text-xs bg-amber-500 text-white shadow" : "px-3 py-1.5 rounded-full title-font text-xs text-amber-900 hover:bg-amber-200";
+            document.getElementById('voiceTabMyan').className = tab === 'myanmarLetters' ? "px-3 py-1.5 rounded-full title-font text-xs bg-amber-500 text-white shadow" : "px-3 py-1.5 rounded-full title-font text-xs text-amber-900 hover:bg-amber-200";
             initVoiceManager();
         }
 
@@ -924,10 +1721,16 @@
             let items = [];
             if (voiceTab === 'numbers') {
                 for (let i = 1; i <= 20; i++) {
-                    items.push({ key: `num_${i}`, label: `ဂဏန်းသံ (${i})` });
+                    items.push({ key: `num_${i}`, label: `မြန်မာဂဏန်း (${i})` });
                 }
+            } else if (voiceTab === 'engNumbers') {
+                for (let i = 1; i <= 20; i++) {
+                    items.push({ key: `engnum_${i}`, label: `English Number (${i})` });
+                }
+            } else if (voiceTab === 'abc') {
+                items = abcData.map(a => ({ key: `abc_${a.letter}`, label: `English ABC: ${a.letter} - ${a.word}` }));
             } else {
-                items = abcData.map(a => ({ key: `abc_${a.letter}`, label: `${a.letter} - ${a.word}` }));
+                items = myanmarLettersData.map(m => ({ key: `myan_${m.letter}`, label: `မြန်မာအက္ခရာ: ${m.letter} - ${m.word}` }));
             }
 
             items.forEach(item => {
@@ -936,7 +1739,7 @@
                 const hasCustom = customVoices[item.key] ? "✅ အသံသွင်းပြီး" : "⚪ အသံမရှိသေးပါ";
                 row.innerHTML = `
                     <div class="flex flex-col">
-                        <span class="title-font text-base sm:text-lg text-slate-700">${item.label}</span>
+                        <span class="title-font text-sm sm:text-base text-slate-700">${item.label}</span>
                         <span class="text-[11px] font-bold text-slate-400">${hasCustom}</span>
                     </div>
                     <div class="flex items-center gap-1.5">
